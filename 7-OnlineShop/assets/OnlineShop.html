@@ -1,0 +1,221 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Online Fit Shop</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+  <link rel="stylesheet" href="./styles/style.css" />
+  <script src="https://kit.fontawesome.com/92de7bc6d5.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <a href="/1-ProjectsBundle/index.htm"><i style="color:white; font-size:40px; position:absolute; top:20; left:20 " class="fas fa-undo"></i></a>
+  
+  <section class="navigationMenu">
+    <div class="container">
+      <nav class="navigation">
+        <ul class="navBar-login">
+          <li class="logo login">
+            <i class="fa-solid fa-person-walking-arrow-right"></i>
+          </li>
+        </ul>
+        <div class="container">
+          <ul class="navBar">
+            <!-- <li class="logo"> <i class="fa-solid fa-house"></i></li> -->
+            <li class="logo"> <i class="fa-solid fa-address-card"></i></li>
+            <li class="logo cart"><span class="cart-counter" style="color:gold"></span><i class="fa-solid fa-cart-arrow-down"></i></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </section>
+  <div class="review-wrap">
+    <div class="review-product">
+      <div class="row preveiw-holder">
+        <div class="col-12 col-md-7 image-preview">
+          <img class="update-img" src="https://fakestoreapi.com/img/71kWymZ+c+L._AC_SX679_.jpg" alt="">
+        </div>
+        <div class="col-12 col-md-5 text-preview">
+          <h6 class="update-name-price">Just another item</h6>
+          <p class="product-info"></p>
+            <button class="add-button">Add to Cart</button>
+            <div class="exit-item-review"><i class="fa-solid fa-circle-xmark"></i></div>
+          </div>
+      </div>
+    </div>
+  </div>
+  <section class="main-content">
+    <div class="container">
+      <div class="row shop-holder">
+        <div class="col-6 col-sm-4 col-lg-3">
+          <ul class="Filters">
+
+            <form class="search">
+              <input type="text" class="searchBar" placeholder="Search.." />
+              <button type="submit" class="searchButton">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+            </form>
+            <li class="All-Items">All</li>
+            <li class="Men-Clothing">Men's Clothing</li>
+            <li class="Jewelery">Jewelery</li>
+            <li class="Electronics">Electronics</li>
+            <li class="Women-Clothing">Women's Clothing</li>
+          </ul>
+        </div>
+        <div class="col-6 col-sm-8 col-lg-9">
+          <div class="row shop-items">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="Section-Login">
+
+    <form class="login-form">
+      <div class="login-header">Welcome to Fit-Shop</div>
+
+      <div class="exit-login"><i class="fa-solid fa-circle-xmark"></i></div>
+      <div class="user-box">
+        <input type="text" name="name" required>
+        <label for="name"><i class="fa fa-user"></i> <b>Username</b></label>
+      </div>
+
+      <div class="user-box">
+        <input type="password" name="password" required>
+        <label for="password"><i class="fal fa-key"></i><b> Password</b></label>
+      </div>
+
+      <button class="login-btn login-form-decorations" type="submit">Login</button>
+
+      <input type="checkbox" checked="checked" name="remember"> Remember me
+      <label class="remember-label">
+      </label>
+    </form>
+
+  </section>
+
+  <section class="cart-holder">
+    <div class="cart-menu">
+      <div class="exit-order"><i class="fa-solid fa-circle-xmark"></i></div>
+      <div class="row">
+
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-md-7 order-items">
+          <h5 class="order-header-summary">Order Summary</h5>
+          <table class="items-table">
+            <tr>
+              <th>Item</th>
+              <th>Price</th>
+            </tr>
+      
+
+
+
+          </table>
+          <table class="total-cost-table">
+
+            <tr>
+              <td>Delivery</td>
+              <td>5$ </td>
+            </tr>
+            <tr>
+              <td>Tax</td>
+              <td>20% </td>
+            </tr>
+            <tr>
+              <td style="font-size: 35px; text-decoration:1.5px underline rgb(0, 183, 255);">Total</td>
+              <td class="cart-cost" style="font-size: 35px; text-decoration:1.5px underline rgb(0, 183, 255);"></td>
+            </tr>
+
+
+          </table>
+
+        </div>
+        <div class="col-12 col-md-5 order-cost">
+          <h5 class="order-header-Payment">Checkout</h5>
+          <div class="row payment-wrapper">
+            <div class="col-6 address-wrapper">
+              <span>Adress Details</span>
+              <form class="billing-address">
+
+                <div class="user-box">
+                  <input type="text" id="fname" name="firstname" required>
+                  <label for="fname"><i class="fa fa-user"></i> Full Name</label>
+                </div>
+
+                <div class="user-box">
+                  <input type="text" id="email" name="email" required>
+                  <label for="email"><i class="fa fa-envelope"></i> Email</label>
+
+                </div>
+
+                <div class="user-box">
+                  <input type="text" id="adr" name="address" required>
+                  <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
+
+                </div>
+
+                <div class="user-box">
+                  <input type="text" id="city" name="city" required>
+                  <label for="city"><i class="fa fa-institution"></i> City</label>
+
+                </div>
+
+                <div class="user-box">
+                  <input type="text" id="zip" name="zip" required>
+                  <label for="zip">Zip</label>
+
+                </div>
+                <button type='submit' id="confirm-Adress" class="checkout-btn">To Payment <i style="font-size:20px;" class="fas fa-arrow-right"></i></button>
+
+              </form>
+            </div>
+            <div class="col-6 Card-wrapper">
+              <span>Billing Details</span>
+              <form class="Payment">
+                <div class="user-box">
+                  <input type="text" id="cname" name="cardname" required>
+                  <label for="cname"><i class="fa fa-user"></i> Name on Card</label>
+                </div>
+                <div class="user-box">
+                  <input type="text" id="ccnum" name="cardnumber" required>
+                  <label for="ccnum"><i class="fa-solid fa-credit-card"></i> Card number</label>
+                </div>
+                <div class="user-box">
+                  <input type="text" id="expmonth" name="expmonth" required>
+                  <label for="expmonth"><i class="fa-regular fa-calendar-check"></i> Exp Month</label>
+                </div>
+                <div class="user-box">
+                  <input type="text" id="expyear" name="expyear" required>
+                  <label for="expyear">
+
+
+                    <i class="fa-regular fa-calendar-check"></i> Exp Year</label>
+                </div>
+                <div class="user-box">
+                  <input type="text" id="cvv" name="cvv" required>
+                  <label for="cvv"> CVV</label>
+                </div>
+                <button id="confirm-billing" class="checkout-btn">Place Order</button>
+              </form>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="block-screen"></div>
+  
+
+  <script src='./js/app.js'></script>
+</body>
+
+</html>

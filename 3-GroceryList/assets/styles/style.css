@@ -1,0 +1,99 @@
+body{  
+    font-size:15px;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(77, 0, 57);
+    color: rgb(77, 0, 57);
+}
+
+.app-wrapper{
+    margin-top: 100px;
+    height: fit-content;
+    padding: 40 100;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    font-size: 20px;
+    text-transform: capitalize;
+    position: relative;
+    line-height: 0;
+
+}
+
+.grocery-item{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.clear-btn{
+    text-align: center;
+}
+
+.alert{
+    font-size: 20px;
+    border-radius: 10px;
+    padding:1 10;
+    text-align: center;
+    position: absolute;
+    top: 1;
+    left: 10%;
+    right: 10%;
+}
+
+.alert-fail{
+    color: rgb(77, 0, 57);
+    background: rgb(243, 97, 97);
+    padding: 10px;
+}
+.alert-success{
+    color: rgb(77, 0, 57);
+    background: rgb(168, 238, 203);
+    padding: 10px;
+}
+
+.gorcery-container{
+    visibility: hidden;
+}
+
+.show-container{
+    visibility: visible;
+}
+
+.delete-btn{
+    border: none;
+    background: transparent;
+    color: rgb(77, 0, 57);
+    font-size: 20px;
+}
+
+.edit-btn{
+    border: none;
+    background: transparent;
+    color: rgb(77, 0, 57);
+    font-size: 20px;
+}
+.clear-btn{
+    margin-top:20px;
+    border: none;
+    background: transparent;
+    color: rgb(77, 0, 57);
+    font-size: 20px;
+    text-transform: capitalize;
+    text-align: center;
+}
+
+.submit-btn{
+    background-color: white;
+    color: rgb(77, 0, 57);
+    font-size: 20px;
+}
+.form-control input{
+    font-size: 20px;
+    color: rgb(77, 0, 57);
+
+}
+.form-control label{
+    font-size: 20px;
+    color: rgb(77, 0, 57);
+
+}

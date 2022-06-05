@@ -1,0 +1,87 @@
+body {
+    background-color: lightblue;
+    margin: 0;
+    padding: 0;
+    transition: all 800ms
+
+  }
+
+  .color{
+      text-transform: capitalize;
+  }
+  .container{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    .navbar{
+        background-color:black;
+        padding:5px;
+    }
+    .navbar ul{
+
+     display: flex;
+     align-items: center;
+     justify-content: space-around;
+    }
+    
+    .navbar li{
+        text-decoration: none;
+        font-size: 30px;
+        background-color:black;
+        border-radius:10px;
+        padding: 0 10 0 10;
+        list-style-type: none;
+        align-items: space-around;
+    }
+
+    .navbar a{
+        text-decoration: none;
+        color: white;
+
+    }
+    
+
+
+    .main-content h2{
+
+        text-align: center;
+        align-items: center;
+        color: white;
+        font-size: 30px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        background-color:black;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-radius: 10px;
+        width: 100%;
+    }
+    .main-content span{
+        text-align: center;
+        align-items: center;
+        color: lightblue;
+        font-size: 30px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        background-color:black;
+        padding-left: 10px;
+    
+
+    }
+
+/* buttons */
+    button{
+        font-size:15px;
+        color: white;
+        background-color: black;;
+        width: 140px;
+        height: 40px;
+        border-radius: 40px;
+        transition-duration: 300ms;
+    }
+
+    button:hover{
+     transform: scale(1.25);
+    }
+
+    

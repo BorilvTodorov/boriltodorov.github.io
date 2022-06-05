@@ -1,0 +1,276 @@
+body {
+  background-color: rgb(39, 7, 19);
+}
+* {
+  margin: 0;
+  padding: 0;
+  font-family: cursive;
+}
+
+.chat-wrapper {
+  margin-top: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.chat {
+  border: 1px solid;
+  width: 500px;
+  background-color: transparent;
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.chat-title {
+  padding: 10 0;
+  display: flex;
+  align-items: center;
+  color: black;
+  border-radius: 20px;
+  width: 100%;
+  height: auto;
+  background-color: #ce4a7eff;
+  border: 1px solid white;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  color: white;
+}
+.chat-title .avatar {
+  display: flex;
+  margin-left: 15px;
+  margin-right: 20px;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+  border: 1px solid black;
+}
+.john-comment {
+  margin-top: 10px;
+  padding-right: 20%;
+  display: flex;
+  align-items: center;
+  float: left;
+  position: relative;
+}
+
+.chat-msg .avatar {
+  background: white;
+  display: flex;
+  margin-left: 2px;
+  border-radius: 50%;
+  width: 42px;
+  height: 40px;
+  margin-right: 10px;
+  overflow: hidden;
+  border: 1px solid black;
+  justify-content: center;
+  position: absolute;
+  bottom: -10px;
+  margin-left: 10px;
+  border: 2px solid #ce4a7eff;
+}
+.john-said {
+  padding: 5px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px;
+  border-bottom-left-radius: 0;
+  margin: 10 0;
+  width: 100%;
+  word-break: break-word;
+  margin-left: 68px;
+  background-color: #ce4a7eff;
+  color: white;
+  padding: 0 10;
+  border: 1px solid white;
+}
+.john-said h1 {
+}
+.john-said h5 {
+    padding-bottom: 10px;
+    color: #1c1c1bff;
+  margin-top: 5px;
+}
+.chat-msg {
+  width: 100%;
+  height: 100%;
+  background-color: #1c1c1bff;
+  padding-bottom: 25px;
+  border: 1px solid white;
+  overflow: auto;
+  max-height: 650px;
+}
+
+.my-comment {
+  margin-right: 5%;
+  margin-top: 10px;
+  padding-left: 20%;
+  display: flex;
+  align-items: center;
+  float: right;
+  position: relative;
+}
+
+.i-said {
+  padding: 5px;
+  background-color: rgb(138, 179, 255);
+  border-radius: 20px;
+  border-bottom-right-radius: 0;
+  margin: 10 0;
+  width: 100%;
+  word-break: break-word;
+  background-color: white;
+  color: #1c1c1bff;
+  padding: 0 10;
+  border: 1px solid #ce4a7eff;
+}
+.i-said h5 {
+    padding-left:10px;
+  align-items: start;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  color: #ce4a7eff;
+   padding-bottom: 10px;
+}
+
+.chat-reply {
+  background-color: #ce4a7eff;
+  height: 82px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  border: 1px solid white;
+}
+.chat-reply input {
+   color: white;
+  background-color: #1c1c1bff;
+  border: 1px solid white;
+  border-right: none;
+  border-radius: 10px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  height: 34px;
+  width: 50%;
+  padding-left: 10px;
+  z-index: 1;
+}
+::placeholder{
+    color:#ce4a7eff;
+}
+.chat-reply button {
+    color: #ce4a7eff;
+  background-color: #1c1c1bff;
+  border: 1px solid white;
+  border-left: none;
+  border-radius: 10px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  min-height: 34px;
+  width: 10%;
+  transition: all 500ms;
+}
+.chat-reply button:hover {
+color:white;
+}
+
+.bubles{
+    display: flex;
+    align-items: center;
+    font-size:30px;
+    padding-top: 30px;
+    width: 100%;
+}
+
+
+
+
+
+
+.bubles-animation{
+    display: flex;  /*  give flex with JS and float or Right depending who's typing */
+    float: right;
+    align-items: center;
+    background-color:#ce4a7eff;
+    border-radius: 20px;
+    padding:18 20;
+    float:right;
+    margin: 10px;
+    margin-right: 67px;
+}
+/*  Animation */
+@keyframes typing {
+    0% {
+      transform: translate(0,0)
+    }
+    50% {
+      transform: translate(0, 7px)
+    }
+    100% {
+      transform: translate(0,0)
+    }
+  }
+
+
+
+.buble-1{
+    display: flex;
+    margin: 1px;
+    width: 7.5px;
+    height: 7.5px;
+    border-radius: 50%;
+    background-color:white;
+    animation: typing 1.3s linear infinite;
+    animation-delay: .1s;
+}
+.buble-2{
+    display: flex;
+    margin: 1px;
+    width: 7.5px;
+    height: 7.5px;
+    border-radius: 50%;
+    background-color:white;
+    animation: typing 1.3s linear infinite;
+    animation-delay: .3s;
+}
+.buble-3{
+    display: flex;
+    margin: 1px;
+    width: 7.5px;
+    height: 7.5px;
+    border-radius: 50%;
+    background-color:white;
+    animation: typing 1.3s linear infinite;
+    animation-delay: .5s;
+}
+
+.left-bubbles{
+    display: flex;
+    margin-left: 10px;
+    float: left;
+    border-bottom-left-radius: 0;
+
+}
+
+.right-bubbles{
+    display: flex;
+    float: right;
+    margin-right: 28px;
+    border-bottom-right-radius: 0;
+}
+
+.bubles .avatar{
+display: flex;
+position: relative;
+
+}

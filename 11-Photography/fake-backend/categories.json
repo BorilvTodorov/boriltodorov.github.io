@@ -1,0 +1,28 @@
+{
+    "data": [
+        {
+            "title": "Nature",
+            "tag": "nature"
+        },
+        {
+            "title": "Space",
+            "tag": "space"
+        },
+        {
+            "title": "Wildlife",
+            "tag": "wildlife"
+        },
+        {
+            "title": "Travel",
+            "tag": "travel"
+        },
+        {
+            "title": "Food",
+            "tag": "food"
+        },
+        {
+            "title": "Nostalgia",
+            "tag": "nostalgia"
+        }
+    ]
+}

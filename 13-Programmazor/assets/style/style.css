@@ -1,0 +1,367 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  user-select: none;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+  background-color: black;
+  color: rgb(66, 171, 246);
+  font-size: 20px;
+}
+
+.world {
+  height: 900px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  /* overflow: hidden; */
+}
+.start-screen {
+  position: absolute;
+  font-size: 3vmin;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+.hide {
+  display: none;
+}
+.ground {
+  --left: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  transform: translate(-0%, -50%);
+  left: calc(var(--left) * 1%);
+  /* position: absolute; */
+}
+.dino {
+  position: absolute;
+  height: 20%;
+  top: 50%;
+  left: 35%;
+  transform: translate(-1%, -50%);
+  z-index: 5;
+}
+
+.questions {
+  position: relative;
+  z-index: 1;
+  width: 40%;
+  top: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.quiz {
+  position: absolute;
+  align-self: center;
+  font-size: 40px;
+  top: 1%;
+}
+.questions img {
+  width: 100%;
+}
+.question-paragraph {
+  color: rgb(69, 38, 12);
+  max-width: 48%;
+  font-size: 35px;
+  position: absolute;
+  top: 15%;
+}
+
+.question-paragraph li {
+  list-style-type: upper-alpha;
+}
+.answer-A {
+  margin-top: 5%;
+}
+
+.Clound-A {
+  --left: 85;
+  position: absolute;
+  width: 10%;
+  top: 8%;
+  right: 10%;
+  left: calc(var(--left) * 1%);
+}
+.Clound-B {
+  --left: 85;
+  position: absolute;
+  width: 10%;
+  top: 40%;
+  right: 10%;
+  left: calc(var(--left) * 1%);
+}
+.Clound-C {
+  --left: 85;
+  position: absolute;
+  width: 10%;
+  top: 70%;
+  right: 10%;
+  left: calc(var(--left) * 1%);
+}
+
+.Score {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 10%;
+  height: 80px;
+  width: 80px;
+  font-size: 30px;
+  font-weight: bold;
+  border-radius: 50%;
+  border: 1px solid white;
+  color: rgb(0, 0, 0);
+  background-color: yellowgreen;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+}
+.ScoreTag {
+  position: absolute;
+  top: 0%;
+  font-size: 40px;
+  font-weight: bold;
+  border-radius: 50%;
+  color: yellowgreen;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+}
+.Buttons-Wrapp {
+  position: absolute;
+  top: 0%;
+  left: 0;
+}
+.SpeedButtons {
+display: flex;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  gap: 5px;
+}
+.speedUp {
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 60px;
+  font-size: 20px;
+  color: rgb(223, 255, 158);
+  background-color: rgb(114, 157, 249);
+  z-index: 6;
+  cursor: pointer;
+}
+.speedDown {
+  width: 60px;
+  height: 60px;
+  font-size: 20px;
+  color: rgb(223, 255, 158);
+  background-color: rgb(114, 157, 249);
+  z-index: 6;
+  cursor: pointer;
+}
+.play{
+
+    right: -205px;
+    width: 60px;
+    height: 60px;
+    font-size: 20px;
+    color: rgb(223, 255, 158);
+    background-color: rgb(114, 157, 249);
+    z-index: 6;
+    cursor: pointer;
+}
+.pause{
+
+    right: -280px;
+    width: 60px;
+    height: 60px;
+    font-size: 20px;
+    color: rgb(223, 255, 158);
+    background-color: rgb(114, 157, 249);
+    z-index: 6;
+    cursor: pointer;
+}
+
+
+@media only screen and (max-width: 1440px) {
+  .question-paragraph {
+    font-size: 24px;
+  }
+  .quiz {
+    top: -2%;
+    font-size: 40px;
+  }
+  .Score {
+    height: 60px;
+    width: 60px;
+    font-size: 25px;
+  }
+  .ScoreTag {
+    font-size: 35px;
+  }
+  .speedUp {
+    width: 50px;
+    height: 50px;
+    font-size: 18px;
+  }
+  .speedDown {
+    width: 50px;
+    height: 50px;
+    font-size: 18px;
+
+  }
+  .play{
+    width: 50px;
+    height: 50px;
+    font-size: 18px;
+  }
+  .pause{
+    width: 50px;
+    height: 50px;
+    font-size: 18px;
+  }
+}
+
+@media only screen and (max-width: 1250px) {
+  .question-paragraph {
+    font-size: 20px;
+  }
+  .quiz {
+    top: -2%;
+    font-size: 35px;
+  }
+  .Score {
+    height: 50px;
+    width: 50px;
+    font-size: 20px;
+  }
+  .ScoreTag {
+    font-size: 30px;
+  }
+  .speedUp {
+    width: 50px;
+    height: 50px;
+    font-size: 18px;
+  }
+  .speedDown {
+    width: 50px;
+    height: 50px;
+    font-size: 18px;
+  }
+  .play{
+    width: 50px;
+    height: 50px;
+    font-size: 18px;
+  }
+  .pause{
+    width: 50px;
+    height: 50px;
+    font-size: 18px;
+  }
+}
+@media only screen and (max-width: 1024px) {
+  .question-paragraph {
+    font-size: 16px;
+  }
+  .quiz {
+    top: -2%;
+    font-size: 30px;
+  }
+}
+@media only screen and (max-width: 900px) {
+  .question-paragraph {
+    font-size: 12px;
+  }
+  .quiz {
+    top: -3%;
+    font-size: 25px;
+  }
+  .Score {
+    height: 40px;
+    width: 40px;
+    font-size: 18px;
+  }
+  .ScoreTag {
+    font-size: 25px;
+  }
+  .speedUp {
+    width: 40px;
+    height: 40px;
+    font-size: 15px;
+  }
+  .speedDown {
+    width: 40px;
+    height: 40px;
+    font-size: 15px;
+  }
+  .play{
+    width: 40px;
+    height: 40px;
+    font-size: 15px;
+  }
+  .pause{
+    width: 40px;
+    height: 40px;
+    font-size: 15px;
+  }
+}
+@media only screen and (max-width: 650px) {
+  .question-paragraph {
+    font-size: 10px;
+  }
+  .quiz {
+    top: -2%;
+    font-size: 18px;
+  }
+  .Score {
+    height: 35px;
+    width: 35px;
+    font-size: 18px;
+  }
+  .ScoreTag {
+    font-size: 20px;
+  }
+  .speedUp {
+    width: 35px;
+    height: 35px;
+    font-size: 13px;
+  }
+  .speedDown {
+    width: 35px;
+    height: 35px;
+    font-size: 13px;
+  }
+  .play{
+    width: 35px;
+    height: 35px;
+    font-size: 13px;
+  }
+  .pause{
+    width: 35px;
+    height: 35px;
+    font-size: 13px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .question-paragraph {
+    font-size: 8px;
+  }
+  .quiz {
+    top: -2%;
+    font-size: 12px;
+  }
+}
