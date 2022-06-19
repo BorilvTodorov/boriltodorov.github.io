@@ -56,6 +56,7 @@
   list-style: none;
 }
 .header-nav-menu li {
+  cursor: pointer;
   padding: 11px;
 }
 .header-nav-menu li + li {
@@ -477,6 +478,7 @@
   background-color: #fff;
 }
 .accordion-button {
+  cursor: pointer;
   display: flex;
   align-items: center;
   background-color: #fff;
@@ -677,6 +679,7 @@
 
 /* slider */
 .slide-prev {
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -695,6 +698,7 @@
   background-color: rgb(2555, 255, 255, 02);
 }
 .slide-next {
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -797,6 +801,7 @@
   height: 100%;
 }
 .searchButton {
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
