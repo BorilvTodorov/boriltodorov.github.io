@@ -689,7 +689,7 @@
   position: absolute;
   background: none;
   border: none;
-  font-size: 2.5rem;
+  font-size: 1.3rem;
   z-index: 2;
   top: 50%;
   transform: translateY(-50%);
@@ -708,7 +708,7 @@
   position: absolute;
   background: none;
   border: none;
-  font-size: 2.5rem;
+  font-size: 1.3rem;
   z-index: 2;
   top: 50%;
   transform: translateY(-50%);
