@@ -1,0 +1,148 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fighters</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  </head>
+  <body style="display: flex; align-items: center; justify-content: center">
+    <div class="game-wrapper">
+      <div class="WelcomeScreen"> 
+        <h2>Use A,W,D keys to move and G to Attack</h2>
+        <h2>Each defeated enemy earns you gold</h2>
+        <h2>Use your gold to purchase upgrades or gamble</h2>
+        <h1>Pres Enter to Start</h1> 
+       </div>
+      <div class="next-level">
+        <div style="margin-top: 10; padding: 0">Each upgrade costs 100 Score</div>
+        <!-- shop items -->
+        <div class="shop-holder">
+          <!-- speed -->
+          <div class="shop-item-box speedUp">
+            <span>Speed Up</span>
+            <div class="image-holder">
+              <img src="./img/gold-boots.png" alt="">
+            </div>
+            <p>Increases player movement speed by 0.5</p>
+          </div>
+          <!-- Damage -->
+          <div class="shop-item-box dmgUp">
+            <span>Damage Up</span>
+            <div class="image-holder">
+              <img src="./img/sword.png" alt="">
+            </div>
+            <p>Increases player damage by 1</p>
+          </div>
+          <!-- Armour -->
+          <div class="shop-item-box armorUp">
+            <span>Armor Up</span>
+            <div class="image-holder">
+              <img src="./img/shield.png" alt="">
+            </div>
+            <p>Increases player defences by 1</p>
+          </div>
+          <!-- Regen -->
+          <div class="shop-item-box regenUp">
+            <span>Regeneration Up</span>
+            <div class="image-holder">
+              <img src="./img/regens.png" alt="">
+            </div>
+            <p>Increases player life regeneration by 0.2</p>
+          </div>
+          <!-- shacles -->
+          <div class="shop-item-box Shacles">
+            <span>Shacles</span>
+            <div class="image-holder">
+              <img src="./img/shacles.png" alt="">
+            </div>
+            <p>Enemy can't jump</p>
+          </div>
+          <!-- slow -->
+          <div class="shop-item-box">
+            <span>Slow</span>
+            <div class="image-holder Slow">
+              <img src="./img/Snails.png" alt="">
+            </div>
+            <p>Reduce enemy speed</p>
+          </div>
+        </div>
+        
+        <div class="stats-holder">
+         <div id="player-stats" class="stats">
+          <h3>Player stats</h1>
+            <div class="stat-line"> <div class="img-div"><img src="./img/gold-boots.png" alt=""><strong> Speed</strong></div> <span class="player-speed">1</span></div>
+            <div class="stat-line"> <div class="img-div"><img src="./img/sword.png" alt=""><strong>Damage</strong></div> <span class="player-damage" >1</span></div>
+            <div class="stat-line"> <div class="img-div"><img src="./img/shield.png" alt=""><strong>Armor</strong></div> <span class="player-armor">1</span></div>
+            <div class="stat-line"> <div class="img-div"><img src="./img/regens.png" alt=""><strong>Regen</strong></div> <span class="player-regen">1</span></div>
+         </div>
+         <div class="level">
+          <div>Completed Level: <span class="current-level">1</span> </div>
+          <div>Your Score: <span class="current-score">100</span> </div>
+         </div>
+         <div id="enemy-stats" class="stats">
+          <h3>Enemy stats</h1>
+            <div class="stat-line"> <div class="img-div"><img src="./img/gold-boots.png" alt=""><strong> Speed</strong></div> <span class="enemy-speed">1</span></div>
+            <div class="stat-line"> <div class="img-div"><img src="./img/sword.png" alt=""><strong>Damage</strong></div> <span class="enemy-damage">1</span></div>
+            <div class="stat-line"> <div class="img-div"><img src="./img/shield.png" alt=""><strong>Armor</strong></div> <span class="enemy-armor">1</span></div>
+            <div class="stat-line"> <div class="img-div"><img src="./img/regens.png" alt=""><strong>Regen</strong></div> <span class="enemy-regen">1</span></div>
+         </div>
+        </div>
+        <div class="gamble-holder">
+          <div class="Gamble"> <strong>Gamble:</strong><span>Double your score or lose it all</span></div>
+          <div class="next-enemy">To Next level >></div>
+        </div>
+      </div>
+      <div class="UI-wrapp">
+        <!-- player -->
+        <div
+          style="
+            position: relative;
+            width: 100%;
+            height: 30px;
+            display: flex;
+            justify-content: flex-end;
+          "
+        >
+          <div
+            style="
+              background-color: #f472b6;
+              opacity: 0.3;
+              height: 30px;
+              width: 100%;
+              border: 2px solid white;
+            "
+          ></div>
+          <div id="playerHealth">100</div>
+        </div>
+        <!-- timer -->
+        <div id="timer" class="game-timer">99</div>
+        <!-- enemy -->
+        <div style="position: relative; width: 100%; height: 30px">
+          <div
+            style="
+              background-color: #f472b6;
+              opacity: 0.3;
+              height: 30px;
+              border: 2px solid white;
+            "
+          ></div>
+          <div id="enemyHealth">100</div>
+        </div>
+      </div>
+      <canvas></canvas>
+    </div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"
+      integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="js/utils.js"></script>
+    <script src="js/classes.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>
