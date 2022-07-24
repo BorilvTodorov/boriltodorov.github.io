@@ -297,19 +297,11 @@ function createAttack(xCor,yCor){
 
 
 
-//  test functions
-// window.addEventListener('keydown', function (e) {
-//     if (e.key == 'z') {
-//         enemy.dead = true;
-//     }
-//     if (e.key == 'p') {
-//         console.log('Enemy', enemy.possition.x)
-//         console.log('Player', player.possition.x)
-//         console.log('Enemy pos- player pos ', (enemy.possition.x - player.possition.x))
-//         console.log('player pos- Enemy pos ', (player.possition.x - enemy.possition.x))
-//     }
-// })
-// player=playerKnight
+window.addEventListener('keydown', function (e) {
+    if (e.key == '-') {
+        enemy.dead = true;
+    }
+})
 let enemy = new Fighter({
     possition: {
         x: 800,
@@ -788,7 +780,7 @@ const enemyHuntress = new Fighter({
         },
         width: 130,
         height: 100,
-        attackDelay: 1100,
+        attackDelay: 1300,
     },
 })
 //  zombie Knight 100% complete
@@ -848,7 +840,7 @@ const enemyZombieKnight = new Fighter({
         },
         width: 130,
         height: 100,
-        attackDelay: 820,
+        attackDelay: 1120,
     },
 })
 
