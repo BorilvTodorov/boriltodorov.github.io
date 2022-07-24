@@ -11,14 +11,19 @@
   </head>
   <body style="display: flex; align-items: center; justify-content: center">
     <div class="game-wrapper">
+      <!-- <div class="player-attack-cooldown"><img src="/img/sword.png" alt=""></div> -->
+      <!-- <div class="player-dodge-cooldown"><img src="/img/dodge.png" alt=""></div> -->
       <div class="WelcomeScreen"> 
-        <h2>Use A,W,D keys to move and G to Attack</h2>
-        <h2>Each defeated enemy earns you gold</h2>
-        <h2>Use your gold to purchase upgrades or gamble</h2>
+        <h1>Hello challenger!</h1>
+        <h2>Escape death by using <b style="font-size: 20px;">'A'</b>,<b style="font-size: 20px;">'W'</b>,<b style="font-size: 20px;">'D'</b> keys to move!</h2>
+        <h2>Notice <b style="font-size: 20px;">'Dash'</b> and <b style="font-size: 20px;">'Attack'</b>  Cooldown indicators above your character!</h2>
+        <h2>Use quick double <b style="font-size: 20px;">'A'</b> or <b style="font-size: 20px;">'D'</b> to dash, use it to avoid enemy attacks!</h2>
+        <h2>Use <b style="font-size: 20px;">'L'</b>  to swing your sword, time your attacks well as they also have a cooldown!</h2>
+        <h2>Defeat enemies to earn gold and purchase upgrades. Gamble your gold if you feel lucky!</h2>
         <h1>Pres Enter to Start</h1> 
        </div>
       <div class="next-level">
-        <div style="margin-top: 10; padding: 0">Each upgrade costs 100 Score</div>
+        <div style="margin-top: 10; padding: 0">Each upgrade costs 100 Gold</div>
         <!-- shop items -->
         <div class="shop-holder">
           <!-- speed -->
@@ -80,8 +85,8 @@
             <div class="stat-line"> <div class="img-div"><img src="./img/regens.png" alt=""><strong>Regen</strong></div> <span class="player-regen">1</span></div>
          </div>
          <div class="level">
-          <div>Completed Level: <span class="current-level">1</span> </div>
-          <div>Your Score: <span class="current-score">100</span> </div>
+          <div class="completedLevels">Completed Levels: <span class="current-level">1</span> </div>
+          <div>Your Gold: <span class="current-score">100</span> </div>
          </div>
          <div id="enemy-stats" class="stats">
           <h3>Enemy stats</h1>

@@ -52,7 +52,6 @@ shaclesItem.addEventListener('click', function () {
     if (playerScore >= 100) {
         playerScore -= 100
         enemyCanJump = false
-        shaclesItem.style.display = 'none'
     }
 })
 
@@ -95,7 +94,6 @@ function convertHpToScore() {
         gemble.style.display = 'flex'
         isLevelCompleted = false
         enemyCanJump = true
-        shaclesItem.style.display = 'flex'
         // console.log('transfer score')
     } else {
         // console.log('dont transfer score');
@@ -119,11 +117,11 @@ function updateDispalyedStats() {
     displayLevel.textContent = levelCounter
     // player health
     gsap.to(htmlPlayerHealth, { width: player.health + '%' })
-    htmlPlayerHealth.innerHTML = Math.ceil(player.health)
+    htmlPlayerHealth.innerHTML = Math.floor(player.health)
 
     // enemy health
     gsap.to(htmlEnemyHealth, { width: enemy.health + '%' })
-    htmlEnemyHealth.innerHTML = Math.ceil(enemy.health)
+    htmlEnemyHealth.innerHTML = enemy.health
 }
 canvas.width = 1024;
 canvas.height = 576
@@ -131,7 +129,7 @@ canvas.height = 576
 
 // game Stats Player
 let canDodge = true
-let playerScore = 0
+let playerScore = 1000
 let playerMovementSpeed = 5
 let playerStartDamage = 15
 let playerArmour = 3
@@ -270,8 +268,8 @@ function createDodge(xCor,yCor){
             x: xCor,
             y: yCor,
         },
-        imageSrc: './img/dash.png',
-        scale: 0.017,
+        imageSrc: './img/dodge.png',
+        scale: 0.05,
         framesMax: 1
     
     })
@@ -280,17 +278,17 @@ function createDodge(xCor,yCor){
 }
 
 function createAttack(xCor,yCor){
-    const attack = new Sprite({
+    const dodge = new Sprite({
         possition: {
             x: xCor,
             y: yCor,
         },
-        imageSrc: './img/swordindicator.png',
-        scale: 0.055,
+        imageSrc: './img/sword.png',
+        scale: 0.05,
         framesMax: 1
     
     })
-    attack.update()
+    dodge.update()
 
 }
 
@@ -298,17 +296,17 @@ function createAttack(xCor,yCor){
 
 
 //  test functions
-// window.addEventListener('keydown', function (e) {
-//     if (e.key == 'z') {
-//         enemy.dead = true;
-//     }
-//     if (e.key == 'p') {
-//         console.log('Enemy', enemy.possition.x)
-//         console.log('Player', player.possition.x)
-//         console.log('Enemy pos- player pos ', (enemy.possition.x - player.possition.x))
-//         console.log('player pos- Enemy pos ', (player.possition.x - enemy.possition.x))
-//     }
-// })
+window.addEventListener('keydown', function (e) {
+    if (e.key == 'z') {
+        enemy.dead = true;
+    }
+    if (e.key == 'p') {
+        console.log('Enemy', enemy.possition.x)
+        console.log('Player', player.possition.x)
+        console.log('Enemy pos- player pos ', (enemy.possition.x - player.possition.x))
+        console.log('player pos- Enemy pos ', (player.possition.x - enemy.possition.x))
+    }
+})
 // player=playerKnight
 let enemy = new Fighter({
     possition: {
@@ -788,7 +786,7 @@ const enemyHuntress = new Fighter({
         },
         width: 130,
         height: 100,
-        attackDelay: 1100,
+        attackDelay: 820,
     },
 })
 //  zombie Knight 100% complete
@@ -865,16 +863,16 @@ const enemyTheLastKing = new Fighter({
         x: -50,
         y: 0,
     }, imageSrc: './img/enemyThelastKing/Idle.png',
-    framesMax: 8,
-    scale: 2.5,
+    framesMax: 11,
+    scale: 3,
     offset: {
         x: 215,
-        y: 110,
+        y: 100,
     },
     sprites: {
         idle: {
             imageSrc: './img/enemyThelastKing/Idle.png',
-            framesMax: 8,
+            framesMax: 11,
         },
         run: {
             imageSrc: './img/enemyThelastKing/Run.png',
@@ -882,15 +880,15 @@ const enemyTheLastKing = new Fighter({
         },
         jump: {
             imageSrc: './img/enemyThelastKing/Jump.png',
-            framesMax: 2,
+            framesMax: 4,
         },
         fall: {
             imageSrc: './img/enemyThelastKing/Fall.png',
-            framesMax: 2,
+            framesMax: 4,
         },
         attack1: {
-            imageSrc: './img/enemyThelastKing/Attack2.png',
-            framesMax: 4,
+            imageSrc: './img/enemyThelastKing/Attack.png',
+            framesMax: 6,
         },
         takeHit: {
             imageSrc: './img/enemyThelastKing/Hit.png',
@@ -898,19 +896,22 @@ const enemyTheLastKing = new Fighter({
         },
         death: {
             imageSrc: './img/enemyThelastKing/Death.png',
-            framesMax: 6,
+            framesMax: 9,
         },
     },
     attackBox: {
         offset: {
-            x: -200,
+            x: -180,
             y: 20,
         },
-        width: 350,
+        width: 130,
         height: 100,
-        attackDelay:1200,
+        attackDelay: 820,
     },
 })
+
+
+enemy=enemyTheLastKing
 const keys = {
     a: {
         pressed: false
@@ -975,11 +976,11 @@ function computerAi() {
 function nextLevelUpdate() {
     player.health = 100
     htmlEnemyHealth.style.width = enemy.health + '%'
-    htmlEnemyHealth.innerHTML = Math.ceil(enemy.health)
+    htmlEnemyHealth.innerHTML = enemy.health
     htmlPlayerHealth.style.width = enemy.health + '%'
-    htmlPlayerHealth.innerHTML =  Math.ceil(player.health)
+    htmlPlayerHealth.innerHTML = player.health
     enemyArmor += 1
-    enemyStartDamage += 0.5
+    enemyDamage += 1
     enemyMovementSpeed += 0.2
     player.dead = false
     isLevelCompleted = true
@@ -1031,29 +1032,13 @@ nextEnemyButton.addEventListener('click', (event) => {
             nextLevelUpdate()
         }else if (levelCounter === 8) {
             enemy = enemyHuntress
-            enemyDoesntMiss = 3
-            enemyMissAttack = 3
+            enemyDoesntMiss = 2
+            enemyMissAttack = 2
             nextLevelUpdate()
         }else if (levelCounter === 9) {
             enemy = enemyZombieKnight
             enemyDoesntMiss = 3
             enemyMissAttack = 3
-            nextLevelUpdate()
-            document.querySelector('.completedLevels').innerHTML='Boss Fight'
-            document.querySelector('.completedLevels').style.fontSize='25'
-            document.querySelector('.completedLevels').style.color='#f472b6'
-        }
-        else if (levelCounter === 10) {
-            enemy = enemyTheLastKing
-            nextLevelScreen.style.fontSize ='35'
-            let newDiv = document.createElement("div")
-            newDiv.style.fontSize ='20'
-            newDiv.innerHTML='Refresh to start over'
-            nextLevelScreen.innerHTML='You Won'
-            nextLevelScreen.appendChild(newDiv)
-            
-            enemyDoesntMiss = 2
-            enemyMissAttack = 2
             nextLevelUpdate()
         }
 
@@ -1100,14 +1085,14 @@ function animate() {
 
 
     if (canDodge) {
-        createDodge((player.possition.x+40),(player.possition.y-2))
+        createDodge((player.possition.x+40),(player.possition.y))
     } else {
         
     }
 
 
     if (canPlayerAttackIcon) {
-        createAttack((player.possition.x+10),(player.possition.y))
+        createAttack((player.possition.x+20),(player.possition.y))
         // playerAttackIcon.style.display = 'flex'
     } else {
         // playerAttackIcon.style.display = 'none'
@@ -1358,7 +1343,7 @@ window.addEventListener('keyup', (event) => {
                 canDodge = false
                 setTimeout(function () {
                     canDodge = true
-                }, 1200)
+                }, 1400)
 
             }
             lastkeyPressed = event.key
@@ -1373,7 +1358,7 @@ window.addEventListener('keyup', (event) => {
                 canDodge = false
                 setTimeout(function () {
                     canDodge = true
-                }, 1200)
+                }, 1400)
 
             }
             lastkeyPressed = event.key

@@ -1,0 +1,181 @@
+
+<!-- saved from url=(0032)http://127.0.0.1:5500/index.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fighters</title>
+    <link rel="stylesheet" href="./Fighters_files/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="./Fighters_files/css2" rel="stylesheet">
+  </head>
+  <body style="display: flex; align-items: center; justify-content: center">
+    <div class="game-wrapper">
+      <!-- <div class="player-attack-cooldown"><img src="/img/sword.png" alt=""></div> -->
+      <!-- <div class="player-dodge-cooldown"><img src="/img/dodge.png" alt=""></div> -->
+      <div class="WelcomeScreen"> 
+        <h1>Hello challenger!</h1>
+        <h2>Escape death by using <b style="font-size: 20px;">'A'</b>,<b style="font-size: 20px;">'W'</b>,<b style="font-size: 20px;">'D'</b> keys to move!</h2>
+        <h2>Notice Cooldown indicators below your health bar!</h2>
+        <h2>Quick double <b style="font-size: 20px;">'A'</b> will dash you backwards, use it to avoid enemy attacks!</h2>
+        <h2>Use <b style="font-size: 20px;">'L'</b>  to swing your sword, time your attacks well as they also have a cooldown!</h2>
+        <h2>Defeat enemies to earn gold and purchase upgrades. Gamble your gold if you feel lucky!</h2>
+        <h1>Pres Enter to Start</h1> 
+       </div>
+      <div class="next-level" style="display: none;">
+        <div style="margin-top: 10; padding: 0">Each upgrade costs 100 Gold</div>
+        <!-- shop items -->
+        <div class="shop-holder">
+          <!-- speed -->
+          <div class="shop-item-box speedUp">
+            <span>Speed Up</span>
+            <div class="image-holder">
+              <img src="./Fighters_files/gold-boots.png" alt="">
+            </div>
+            <p>Increases player movement speed by 0.5</p>
+          </div>
+          <!-- Damage -->
+          <div class="shop-item-box dmgUp">
+            <span>Damage Up</span>
+            <div class="image-holder">
+              <img src="./Fighters_files/sword.png" alt="">
+            </div>
+            <p>Increases player damage by 1</p>
+          </div>
+          <!-- Armour -->
+          <div class="shop-item-box armorUp">
+            <span>Armor Up</span>
+            <div class="image-holder">
+              <img src="./Fighters_files/shield.png" alt="">
+            </div>
+            <p>Increases player defences by 1</p>
+          </div>
+          <!-- Regen -->
+          <div class="shop-item-box regenUp">
+            <span>Regeneration Up</span>
+            <div class="image-holder">
+              <img src="./Fighters_files/regens.png" alt="">
+            </div>
+            <p>Increases player life regeneration by 0.2</p>
+          </div>
+          <!-- shacles -->
+          <div class="shop-item-box Shacles">
+            <span>Shacles</span>
+            <div class="image-holder">
+              <img src="./Fighters_files/shacles.png" alt="">
+            </div>
+            <p>Enemy can't jump</p>
+          </div>
+          <!-- slow -->
+          <div class="shop-item-box">
+            <span>Slow</span>
+            <div class="image-holder Slow">
+              <img src="./Fighters_files/Snails.png" alt="">
+            </div>
+            <p>Reduce enemy speed</p>
+          </div>
+        </div>
+        
+        <div class="stats-holder">
+         <div id="player-stats" class="stats">
+          <h3>Player stats</h3>
+            <div class="stat-line"> <div class="img-div"><img src="./Fighters_files/gold-boots.png" alt=""><strong> Speed</strong></div> <span class="player-speed">5.00</span></div>
+            <div class="stat-line"> <div class="img-div"><img src="./Fighters_files/sword.png" alt=""><strong>Damage</strong></div> <span class="player-damage">15.00</span></div>
+            <div class="stat-line"> <div class="img-div"><img src="./Fighters_files/shield.png" alt=""><strong>Armor</strong></div> <span class="player-armor">3.00</span></div>
+            <div class="stat-line"> <div class="img-div"><img src="./Fighters_files/regens.png" alt=""><strong>Regen</strong></div> <span class="player-regen">0.00</span></div>
+         </div>
+         <div class="level">
+          <div>Completed Level: <span class="current-level">1</span> </div>
+          <div>Your Gold: <span class="current-score">1000</span> </div>
+         </div>
+         <div id="enemy-stats" class="stats">
+          <h3>Enemy stats</h3>
+            <div class="stat-line"> <div class="img-div"><img src="./Fighters_files/gold-boots.png" alt=""><strong> Speed</strong></div> <span class="enemy-speed">5.00</span></div>
+            <div class="stat-line"> <div class="img-div"><img src="./Fighters_files/sword.png" alt=""><strong>Damage</strong></div> <span class="enemy-damage">12.00</span></div>
+            <div class="stat-line"> <div class="img-div"><img src="./Fighters_files/shield.png" alt=""><strong>Armor</strong></div> <span class="enemy-armor">2.00</span></div>
+            <div class="stat-line"> <div class="img-div"><img src="./Fighters_files/regens.png" alt=""><strong>Regen</strong></div> <span class="enemy-regen">0.00</span></div>
+         </div>
+        </div>
+        <div class="gamble-holder">
+          <div class="Gamble"> <strong>Gamble:</strong><span>Double your score or lose it all</span></div>
+          <div class="next-enemy">To Next level &gt;&gt;</div>
+        </div>
+      </div>
+      <div class="UI-wrapp">
+        <!-- player -->
+        <div style="
+            position: relative;
+            width: 100%;
+            height: 30px;
+            display: flex;
+            justify-content: flex-end;
+          ">
+          <div style="
+              background-color: #f472b6;
+              opacity: 0.3;
+              height: 30px;
+              width: 100%;
+              border: 2px solid white;
+            "></div>
+          <div id="playerHealth" style="width: 100%;">100</div>
+        </div>
+        <!-- timer -->
+        <div id="timer" class="game-timer">99</div>
+        <!-- enemy -->
+        <div style="position: relative; width: 100%; height: 30px">
+          <div style="
+              background-color: #f472b6;
+              opacity: 0.3;
+              height: 30px;
+              border: 2px solid white;
+            "></div>
+          <div id="enemyHealth" style="width: 100%;">100</div>
+        </div>
+      </div>
+      <canvas width="1024" height="576"></canvas>
+    </div>
+    <script src="./Fighters_files/gsap.min.js.download" integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./Fighters_files/utils.js.download"></script>
+    <script src="./Fighters_files/classes.js.download"></script>
+    <script src="./Fighters_files/index.js.download"></script>
+  <!-- Code injected by live-server -->
+<script type="text/javascript">
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+
+</body></html>
