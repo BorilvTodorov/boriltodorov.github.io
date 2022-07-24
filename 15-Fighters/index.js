@@ -520,7 +520,7 @@ const enemyLastSamurai = new Fighter({
             framesMax: 2,
         },
         attack1: {
-            imageSrc: './img/kenji/Attack1.png',
+            imageSrc: './img/kenji/Attack2.png',
             framesMax: 4,
         },
         takeHit: {
@@ -971,7 +971,7 @@ function nextLevelUpdate() {
     htmlPlayerHealth.style.width = enemy.health + '%'
     htmlPlayerHealth.innerHTML =  Math.ceil(player.health)
     enemyArmor += 1
-    enemyStartDamage += 0.5
+    enemyStartDamage += 0.2
     enemyMovementSpeed += 0.2
     player.dead = false
     isLevelCompleted = true
@@ -1028,8 +1028,8 @@ nextEnemyButton.addEventListener('click', (event) => {
             nextLevelUpdate()
         }else if (levelCounter === 9) {
             enemy = enemyZombieKnight
-            enemyDoesntMiss = 3
-            enemyMissAttack = 3
+            enemyDoesntMiss = 4
+            enemyMissAttack = 4
             nextLevelUpdate()
             document.querySelector('.completedLevels').innerHTML='Boss Fight'
             document.querySelector('.completedLevels').style.fontSize='25'
