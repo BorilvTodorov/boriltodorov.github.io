@@ -285,7 +285,7 @@ function createAttack(xCor,yCor){
             x: xCor,
             y: yCor,
         },
-        imageSrc: './img/swordindicator.png',
+        imageSrc: './img/SwordIndicator.png',
         scale: 0.055,
         framesMax: 1
     
