@@ -547,7 +547,7 @@ const enemyLastSamurai = new Fighter({
         },
         width: 170,
         height: 50,
-        attackDelay: 1020,
+        attackDelay: 1220,
     },
 })
 
