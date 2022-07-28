@@ -856,7 +856,7 @@ const enemyTheLastKing = new Fighter({
     offset: {
         x: -50,
         y: 0,
-    }, imageSrc: './img/enemyThelastKing/Idle.png',
+    }, imageSrc: './img/FinalBoss/Idle.png',
     framesMax: 8,
     scale: 2.5,
     offset: {
@@ -865,31 +865,31 @@ const enemyTheLastKing = new Fighter({
     },
     sprites: {
         idle: {
-            imageSrc: './img/enemyThelastKing/Idle.png',
+            imageSrc: './img/FinalBoss/Idle.png',
             framesMax: 8,
         },
         run: {
-            imageSrc: './img/enemyThelastKing/Run.png',
+            imageSrc: './img/FinalBoss/Run.png',
             framesMax: 8,
         },
         jump: {
-            imageSrc: './img/enemyTheLastKing/Jump.png',
+            imageSrc: './img/FinalBoss/Jump.png',
             framesMax: 2,
         },
         fall: {
-            imageSrc: './img/enemyThelastKing/Fall.png',
+            imageSrc: './img/FinalBoss/Fall.png',
             framesMax: 2,
         },
         attack1: {
-            imageSrc: './img/enemyThelastKing/Attack2.png',
+            imageSrc: './img/FinalBoss/Attack2.png',
             framesMax: 4,
         },
         takeHit: {
-            imageSrc: './img/enemyThelastKing/Hit.png',
+            imageSrc: './img/FinalBoss/Hit.png',
             framesMax: 4,
         },
         death: {
-            imageSrc: './img/enemyThelastKing/Death.png',
+            imageSrc: './img/FinalBoss/Death.png',
             framesMax: 6,
         },
     },
@@ -1093,7 +1093,6 @@ function animate() {
 
     if (canDodge) {
         createDodge((player.possition.x+40),(player.possition.y-2))
-        console.log('hi');
     } else {
         
     }
