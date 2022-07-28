@@ -873,7 +873,7 @@ const enemyTheLastKing = new Fighter({
             framesMax: 8,
         },
         jump: {
-            imageSrc: './img/enemyThelastKing/Jump.png',
+            imageSrc: './img/enemyTheLastKing/Jump.png',
             framesMax: 2,
         },
         fall: {
@@ -951,7 +951,7 @@ function computerAi() {
     }
 
     if (enemy.possition.x < (player.possition.x + 51)) {// if player is behind of enemy
-        if (((player.possition.x + 50) - enemy.possition.x) >= 200 && enemy.possition.x < (player.possition.x + 50)) {
+        if (((player.possition.x + 50) - enemy.possition.x) >= 600 && enemy.possition.x < (player.possition.x + 50)) {
             fakeKeyPress('0')
         } else if ((player.possition.x + 200) !== enemy.possition.x) {
             fakeKeyPress('ArrowRight')
@@ -1093,6 +1093,7 @@ function animate() {
 
     if (canDodge) {
         createDodge((player.possition.x+40),(player.possition.y-2))
+        console.log('hi');
     } else {
         
     }
@@ -1406,6 +1407,11 @@ window.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
         startGame = true;
         startWindow.style.display = 'none'
+    }
+
+    if(event.key === 'p'){
+        console.log('player possition X', player.possition.x)
+        console.log('enemy possition X', enemy.possition.x)
     }
 
 })
