@@ -23,7 +23,7 @@ let displayLevel = document.querySelector('.current-level')
 let playerDodge = document.querySelector('.player-dodge-cooldown')
 let playerAttackIcon = document.querySelector('.player-attack-cooldown')
 let canPlayerAttackIcon = true
-console.log(canPlayerAttackIcon);
+let canEnemyAttackIcon=true
 
 // store
 let speedUpStore = document.querySelector('.speedUp')
@@ -354,11 +354,22 @@ function createAttack(xCor, yCor) {
 
 
 
-
+let cheatBuff=''
 window.addEventListener('keydown', function (e) {
-    if (e.key == '-') {
-        enemy.dead = true;
+    if (e.key == 'o') {
+        cheatBuff+=e.key
     }
+    if (e.key == 'p') {
+        cheatBuff+=e.key
+    }
+    if(cheatBuff=='op'){
+        enemy.dead = true;
+        cheatBuff=''
+    }
+    if(cheatBuff.length>=2){
+        cheatBuff=''
+    }
+   
 })
 let enemy = new Fighter({
     possition: {
@@ -778,7 +789,7 @@ const enemyArcaneWizzard = new Fighter({
         },
         width: 130,
         height: 100,
-        attackDelay: 820,
+        attackDelay: 920,
     },
 })
 // enemy Huntress100% complete
@@ -1043,8 +1054,8 @@ function nextLevelUpdate() {
 // enemy = fireMageEnemy
 let playerDoesntMiss
 let playerMissAttack
-let enemyDoesntMiss = 5
-let enemyMissAttack = 5
+let enemyDoesntMiss = 4
+let enemyMissAttack = 4
 
 
 let levelCounter = 1
@@ -1155,6 +1166,10 @@ function animate() {
         createAttack((player.possition.x - 5), (player.possition.y))
     }
 
+    if(canEnemyAttackIcon){
+        createAttack((enemy.possition.x - 5), (enemy.possition.y))
+    }
+
     if (playerCanDefend) {
         createDefendIndicator((player.possition.x + 55), (player.possition.y - 2))
     }
@@ -1173,6 +1188,8 @@ function animate() {
     updateDispalyedStats()
     convertHpToScore();
 
+
+ 
 
 
     player.velocity.x = 0
@@ -1364,7 +1381,6 @@ window.addEventListener('keydown', (event) => {
 
                     canPlayerAttackIcon = false
                     setTimeout(function () {
-
                         canPlayerAttackIcon = true
                     }, player.attackBox.attackDelay)
                     playerCoolDown = 0
@@ -1424,6 +1440,10 @@ window.addEventListener('keydown', (event) => {
                 if (ElpsPlayerAttTime > enemyDelay || enemyCoolDown > enemyDelay) {
                     enemy.attack();
                     enemyCoolDown = 0
+                    canEnemyAttackIcon = false
+                    setTimeout(function () {
+                        canEnemyAttackIcon = true
+                    }, enemy.attackBox.attackDelay)
                 } else {
                     enemyCoolDown += ElpsPlayerAttTime
                 }
@@ -1517,12 +1537,6 @@ window.addEventListener('keydown', (event) => {
         }
         startWindow.style.display = 'none'
     }
-
-    if (event.key === 'p') {
-        console.log('player possition X', player.possition.x)
-        console.log('enemy possition X', enemy.possition.x)
-    }
-
 })
 
 
