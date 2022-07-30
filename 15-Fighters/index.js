@@ -33,6 +33,18 @@ let gemble = document.querySelector('.Gamble')
 let shaclesItem = document.querySelector('.Shacles')
 let slowItem = document.querySelector('.Slow')
 
+// sounds
+function setupBackgroundSound(){
+    let gameSound = new Audio('./img/sounds/backgroundMusic.mp3');
+    gameSound.play()
+    setTimeout(setupBackgroundSound,240000)
+}
+setupBackgroundSound()
+
+function powerUpSound(){
+    let powerUp = new Audio('./img/sounds/powerUp.wav');
+    powerUp.play()
+}
 
 gambleArray = [1, 1, 0, 0, 0, 0, 1, 0, 1, 0]
 function randomNumber() {
@@ -50,6 +62,7 @@ gemble.addEventListener('click', function () {
 
 shaclesItem.addEventListener('click', function () {
     if (playerScore >= 100) {
+        // powerUpSound()
         playerScore -= 100
         enemyCanJump = false
         shaclesItem.style.display = 'none'
@@ -58,6 +71,8 @@ shaclesItem.addEventListener('click', function () {
 
 slowItem.addEventListener('click', function () {
     if (playerScore >= 100) {
+        powerUpSound()
+        powerUpSound()
         playerScore -= 100
         enemyMovementSpeed -= 0.5
     }
@@ -65,24 +80,28 @@ slowItem.addEventListener('click', function () {
 
 dmgUpStore.addEventListener('click', function () {
     if (playerScore >= 100) {
+        powerUpSound()
         playerScore -= 100
         playerStartDamage++
     }
 })
 armorUpStore.addEventListener('click', function () {
     if (playerScore >= 100) {
+        powerUpSound()
         playerScore -= 100
         playerArmour++
     }
 })
 speedUpStore.addEventListener('click', function () {
     if (playerScore >= 100) {
+        powerUpSound()
         playerScore -= 100
         playerMovementSpeed += 0.5
     }
 })
 regenUpStore.addEventListener('click', function () {
     if (playerScore >= 100) {
+        powerUpSound()
         playerScore -= 100
         playerRegeneration += 0.2
     }
@@ -130,6 +149,9 @@ canvas.height = 576
 
 
 // game Stats Player
+let playerIsDefending = false
+let playerCanDefend = true
+let dispalyDefend = false
 let canDodge = true
 let playerScore = 0
 let playerMovementSpeed = 5
@@ -251,6 +273,10 @@ let player = new Fighter({
             imageSrc: './img/samuraiMack/Death.png',
             framesMax: 6,
         },
+        defend: {
+            imageSrc: './img/samuraiMack/defend.png',
+            framesMax: 7,
+        },
     },
     attackBox: {
         offset: {
@@ -264,7 +290,7 @@ let player = new Fighter({
 
 })
 
-function createDodge(xCor,yCor){
+function createDodge(xCor, yCor) {
     const dodge = new Sprite({
         possition: {
             x: xCor,
@@ -273,13 +299,43 @@ function createDodge(xCor,yCor){
         imageSrc: './img/dash.png',
         scale: 0.017,
         framesMax: 1
-    
+
     })
     dodge.update()
 
 }
 
-function createAttack(xCor,yCor){
+function createDefend(xCor, yCor) {
+    const defend = new Sprite({
+        possition: {
+            x: xCor,
+            y: yCor,
+        },
+        imageSrc: './img/Blocked.png',
+        scale: 1.4,
+        framesMax: 1
+
+    })
+    defend.update()
+
+}
+
+function createDefendIndicator(xCor, yCor) {
+    const defend = new Sprite({
+        possition: {
+            x: xCor,
+            y: yCor,
+        },
+        imageSrc: './img/shield.png',
+        scale: 0.055,
+        framesMax: 1
+
+    })
+    defend.update()
+
+}
+
+function createAttack(xCor, yCor) {
     const attack = new Sprite({
         possition: {
             x: xCor,
@@ -288,7 +344,7 @@ function createAttack(xCor,yCor){
         imageSrc: './img/SwordIndicator.png',
         scale: 0.055,
         framesMax: 1
-    
+
     })
     attack.update()
 
@@ -900,7 +956,7 @@ const enemyTheLastKing = new Fighter({
         },
         width: 350,
         height: 100,
-        attackDelay:1200,
+        attackDelay: 1200,
     },
 })
 const keys = {
@@ -908,6 +964,9 @@ const keys = {
         pressed: false
     },
     d: {
+        pressed: false
+    },
+    k: {
         pressed: false
     },
     w: {
@@ -969,7 +1028,7 @@ function nextLevelUpdate() {
     htmlEnemyHealth.style.width = enemy.health + '%'
     htmlEnemyHealth.innerHTML = Math.ceil(enemy.health)
     htmlPlayerHealth.style.width = enemy.health + '%'
-    htmlPlayerHealth.innerHTML =  Math.ceil(player.health)
+    htmlPlayerHealth.innerHTML = Math.ceil(player.health)
     enemyArmor += 1
     enemyStartDamage += 0.2
     enemyMovementSpeed += 0.2
@@ -1021,35 +1080,35 @@ nextEnemyButton.addEventListener('click', (event) => {
             enemyDoesntMiss = 2
             enemyMissAttack = 2
             nextLevelUpdate()
-        }else if (levelCounter === 8) {
+        } else if (levelCounter === 8) {
             enemy = enemyHuntress
             enemyDoesntMiss = 3
             enemyMissAttack = 3
             nextLevelUpdate()
-        }else if (levelCounter === 9) {
+        } else if (levelCounter === 9) {
             enemy = enemyZombieKnight
             enemyDoesntMiss = 4
             enemyMissAttack = 4
             nextLevelUpdate()
-            document.querySelector('.completedLevels').innerHTML='Boss Fight'
-            document.querySelector('.completedLevels').style.fontSize='25'
-            document.querySelector('.completedLevels').style.color='#f472b6'
+            document.querySelector('.completedLevels').innerHTML = 'Boss Fight'
+            document.querySelector('.completedLevels').style.fontSize = '25'
+            document.querySelector('.completedLevels').style.color = '#f472b6'
         }
         else if (levelCounter === 10) {
             enemy = enemyTheLastKing
-            nextLevelScreen.style.fontSize ='35'
+            nextLevelScreen.style.fontSize = '35'
             let newDiv = document.createElement("div")
-            newDiv.style.fontSize ='20'
-            newDiv.innerHTML='Refresh to start over'
-            nextLevelScreen.innerHTML='You Won'
+            newDiv.style.fontSize = '20'
+            newDiv.innerHTML = 'Refresh to start over'
+            nextLevelScreen.innerHTML = 'You Won'
             nextLevelScreen.appendChild(newDiv)
-            
+
             enemyDoesntMiss = 2
             enemyMissAttack = 2
             nextLevelUpdate()
         }
 
-        
+
 
     } else {
         // console.log('Still alive');
@@ -1091,19 +1150,24 @@ function animate() {
     }
 
 
-    if (canDodge) {
-        createDodge((player.possition.x+40),(player.possition.y-2))
-    } else {
-        
-    }
-
-
     if (canPlayerAttackIcon) {
-        createAttack((player.possition.x+10),(player.possition.y))
-        // playerAttackIcon.style.display = 'flex'
-    } else {
-        // playerAttackIcon.style.display = 'none'
+        createAttack((player.possition.x - 5), (player.possition.y))
     }
+
+    if (playerCanDefend) {
+        createDefendIndicator((player.possition.x + 55), (player.possition.y - 2))
+    }
+
+    if (canDodge) {
+        createDodge((player.possition.x + 25), (player.possition.y - 2))
+    }
+
+    if (dispalyDefend) {
+        createDefend((player.possition.x + 70), (player.possition.y + 25))
+    }
+
+
+
     limitMovementToScreen()
     updateDispalyedStats()
     convertHpToScore();
@@ -1120,6 +1184,8 @@ function animate() {
     } else if (keys.d.pressed && player.lastKey === 'd') {
         player.velocity.x = playerMovementSpeed
         player.switchSprite('run')
+    } else if (keys.k.pressed && player.lastKey === 'k') {
+        player.switchSprite('defend')
     } else {
         player.switchSprite('idle')
     }
@@ -1178,7 +1244,16 @@ function animate() {
         rectangle1: enemy,
         rectangle2: player,
     }) && enemy.isAttacking && enemy.framesCurrent === enemyDoesntMiss) {
-        player.takeHit(enemyDamage)
+        if (!playerIsDefending) {
+            player.takeHit(enemyDamage)
+        } else {
+            dispalyDefend = true
+            setTimeout(function () {
+                dispalyDefend = false
+            }, 300)
+            let blockSound = new Audio('./img/sounds/defendSound.wav');
+            blockSound.play()
+        }
         enemy.isAttacking = false
         // gsap.to(htmlPlayerHealth,{ width: player.health+'%'})
         // htmlPlayerHealth.innerHTML = player.health
@@ -1207,6 +1282,8 @@ animate()
 
 let lastAttack = Date.now()
 let cooldown = 0
+
+
 
 let lastPlayerAttack = Date.now()
 let playerCoolDown = 0
@@ -1276,6 +1353,8 @@ window.addEventListener('keydown', (event) => {
                 let ElpsPlayerAttTime = playerAttackNow - lastPlayerAttack
                 let playerDelay = player.attackBox.attackDelay
                 if (ElpsPlayerAttTime > playerDelay || playerCoolDown > playerDelay) {
+                    let newAttack = new Audio('./img/sounds/swosh.wav');
+                    newAttack.play()
                     player.attack();
 
                     canPlayerAttackIcon = false
@@ -1288,6 +1367,21 @@ window.addEventListener('keydown', (event) => {
                     playerCoolDown += ElpsPlayerAttTime
                 }
                 lastPlayerAttack = playerAttackNow
+                break;
+            case 'k':
+                if (!player.isAttacking && playerCanDefend) {
+                    keys.k.pressed = true
+                    player.lastKey = 'k'
+                    playerIsDefending = true
+                    playerCanDefend = false
+                    setTimeout(function () {
+                        window.dispatchEvent(new KeyboardEvent('keyup', { 'key': 'k' }))
+                    }, 100)
+
+                    setTimeout(function () {
+                        playerCanDefend = true
+                    }, 800)
+                }
                 break;
 
         }
@@ -1346,6 +1440,8 @@ window.addEventListener('keyup', (event) => {
         case 'd':
             keys.d.pressed = false
             if (!player.isAttacking && player.possition.x < 750 && (Date.now() - lastkeyPressTimeD) <= 180 && canDodge) {
+                let dodgeSound = new Audio('./img/sounds/dash.wav');
+                dodgeSound.play()
                 player.possition.x += 200
                 canDodge = false
                 setTimeout(function () {
@@ -1361,6 +1457,8 @@ window.addEventListener('keyup', (event) => {
         case 'a':
             keys.a.pressed = false
             if (!player.isAttacking && player.possition.x > 155 && (Date.now() - lastkeyPressTimeA) <= 180 && canDodge) {
+                let dodgeSound = new Audio('./img/sounds/dash.wav');
+                dodgeSound.play()
                 player.possition.x -= 200
                 canDodge = false
                 setTimeout(function () {
@@ -1370,6 +1468,10 @@ window.addEventListener('keyup', (event) => {
             }
             lastkeyPressed = event.key
             lastkeyPressTimeA = Date.now()
+            break;
+        case 'k':
+            keys.k.pressed = false;
+            playerIsDefending = false
             break;
 
     }
@@ -1408,7 +1510,7 @@ window.addEventListener('keydown', (event) => {
         startWindow.style.display = 'none'
     }
 
-    if(event.key === 'p'){
+    if (event.key === 'p') {
         console.log('player possition X', player.possition.x)
         console.log('enemy possition X', enemy.possition.x)
     }

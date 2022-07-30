@@ -182,6 +182,7 @@ body {
   border: 3px dotted gray;
   padding: 0;
   transition: all 0.2s ease-in-out;
+  cursor: pointer;
 }
 .shop-item-box:hover {
   transform: scale(1.2);

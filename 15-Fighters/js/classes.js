@@ -131,9 +131,11 @@ class Fighter extends Sprite {
     }
 
     takeHit(damage) {
+        let takeLife = new Audio('./img/sounds/takeLife.wav');
+        takeLife.play()
         this.health -= damage
-        if(!this.isAttacking){
-            this.switchSprite('takeHit')
+        if (!this.isAttacking) {
+            // this.switchSprite('takeHit')
         }
     }
 
@@ -153,7 +155,7 @@ class Fighter extends Sprite {
         if (this.image === this.sprites.takeHit.image &&
             this.framesCurrent < this.sprites.takeHit.framesMax - 1) return
 
-            
+
         switch (sprite) {
             case 'idle':
                 if (this.image !== this.sprites.idle.image) {
@@ -201,6 +203,15 @@ class Fighter extends Sprite {
                 if (this.image !== this.sprites.death.image) {
                     this.image = this.sprites.death.image
                     this.framesMax = this.sprites.death.framesMax
+                    this.framesCurrent = 0
+                    let deadSound = new Audio('./img/sounds/death.wav');
+                    deadSound.play()
+                }
+                break;
+            case 'defend':
+                if (this.image !== this.sprites.defend.image) {
+                    this.image = this.sprites.defend.image
+                    this.framesMax = this.sprites.defend.framesMax
                     this.framesCurrent = 0
                 }
                 break;
