@@ -10,6 +10,7 @@ let playerStatSpeed = document.querySelector('.player-speed')
 let playerDisplayDamage = document.querySelector('.player-damage')
 let playerStatArmor = document.querySelector('.player-armor')
 let playerStatRegen = document.querySelector('.player-regen')
+let playerStartRecovery=document.querySelector('.player-recovery')
 
 
 let enemyStatSpeed = document.querySelector('.enemy-speed')
@@ -31,7 +32,7 @@ let armorUpStore = document.querySelector('.armorUp')
 let regenUpStore = document.querySelector('.regenUp')
 let gemble = document.querySelector('.Gamble')
 let shaclesItem = document.querySelector('.Shacles')
-let slowItem = document.querySelector('.Slow')
+let lifePerBlock = document.querySelector('.lifePerBlock')
 
 // sounds
 function setupBackgroundSound(){
@@ -39,7 +40,7 @@ function setupBackgroundSound(){
     gameSound.play()
     setTimeout(setupBackgroundSound,240000)
 }
-setupBackgroundSound()
+
 
 function powerUpSound(){
     let powerUp = new Audio('./img/sounds/powerUp.wav');
@@ -69,12 +70,11 @@ shaclesItem.addEventListener('click', function () {
     }
 })
 
-slowItem.addEventListener('click', function () {
+lifePerBlock.addEventListener('click', function () {
     if (playerScore >= 100) {
         powerUpSound()
-        powerUpSound()
         playerScore -= 100
-        enemyMovementSpeed -= 0.5
+        playerLifePerBlock+=1
     }
 })
 
@@ -129,6 +129,7 @@ function updateDispalyedStats() {
     playerDisplayDamage.textContent = playerStartDamage.toFixed(2)
     playerStatArmor.textContent = playerArmour.toFixed(2)
     playerStatRegen.textContent = playerRegeneration.toFixed(2)
+    playerStartRecovery.textContent=playerLifePerBlock.toFixed(2)
 
     enemyStatSpeed.textContent = enemyMovementSpeed.toFixed(2)
     enemyStatDamage.textContent = enemyStartDamage.toFixed(2)
@@ -154,6 +155,7 @@ let playerCanDefend = true
 let dispalyDefend = false
 let canDodge = true
 let playerScore = 0
+let playerLifePerBlock=3
 let playerMovementSpeed = 5
 let playerStartDamage = 15
 let playerArmour = 3
@@ -1102,7 +1104,6 @@ nextEnemyButton.addEventListener('click', (event) => {
             newDiv.innerHTML = 'Refresh to start over'
             nextLevelScreen.innerHTML = 'You Won'
             nextLevelScreen.appendChild(newDiv)
-
             enemyDoesntMiss = 2
             enemyMissAttack = 2
             nextLevelUpdate()
@@ -1253,6 +1254,10 @@ function animate() {
             }, 300)
             let blockSound = new Audio('./img/sounds/defendSound.wav');
             blockSound.play()
+                player.health+=playerLifePerBlock
+                if(player.health>=100){
+                    player.health=100
+                }
         }
         enemy.isAttacking = false
         // gsap.to(htmlPlayerHealth,{ width: player.health+'%'})
@@ -1506,7 +1511,10 @@ playerRegen();
 let startWindow = document.querySelector('.WelcomeScreen')
 window.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
-        startGame = true;
+        if(!startGame){
+            setupBackgroundSound()
+            startGame = true;
+        }
         startWindow.style.display = 'none'
     }
 
