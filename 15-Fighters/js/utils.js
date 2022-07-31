@@ -19,15 +19,12 @@ function rectangularCollision({ rectangle1, rectangle2 }) {
 //     }
 // }
 
-let timer = 100
+let timer = 60
 let timerId
 function decreaseTime() {
     if (timer > 0) {
         timerId = setTimeout(decreaseTime, 1000)
         timer--;
         document.querySelector('#timer').innerHTML = timer
-    }
-    if (timer === 0) {
-        determineWinner({ player, enemy, timerId })
     }
 }

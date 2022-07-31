@@ -1,16 +1,25 @@
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
 let startGame = false
+let endGame=false
+let playerScoreDisplay = document.querySelector('.current-score')
+let playerHighestScoreDisplay=document.querySelector('.Highest-score')
+let bestScore=localStorage.getItem('BestScore');
+if(bestScore===null)localStorage.setItem('BestScore', 0);
+playerHighestScoreDisplay.textContent = bestScore
+let gameScoreDisplay=document.querySelector('.game-score')
 let htmlPlayerHealth = document.querySelector('#playerHealth')
 let htmlEnemyHealth = document.querySelector('#enemyHealth')
 let nextLevelScreen = document.querySelector('.next-level')
 let nextEnemyButton = document.querySelector('.next-enemy')
 
 let playerStatSpeed = document.querySelector('.player-speed')
+let playerAttackSpeed = document.querySelector('.player-attack-delay')
 let playerDisplayDamage = document.querySelector('.player-damage')
 let playerStatArmor = document.querySelector('.player-armor')
 let playerStatRegen = document.querySelector('.player-regen')
-let playerStartRecovery=document.querySelector('.player-recovery')
+let playerStartRecovery = document.querySelector('.player-recovery')
+let playerBlockDuration = document.querySelector('.player-block-duration')
 
 
 let enemyStatSpeed = document.querySelector('.enemy-speed')
@@ -18,12 +27,12 @@ let enemyStatDamage = document.querySelector('.enemy-damage')
 let enemyStatArmor = document.querySelector('.enemy-armor')
 let enemyStatRegen = document.querySelector('.enemy-regen')
 
-let playerScoreDisplay = document.querySelector('.current-score')
+
 let displayLevel = document.querySelector('.current-level')
 let playerDodge = document.querySelector('.player-dodge-cooldown')
 let playerAttackIcon = document.querySelector('.player-attack-cooldown')
 let canPlayerAttackIcon = true
-let canEnemyAttackIcon=true
+let canEnemyAttackIcon = true
 
 // store
 let speedUpStore = document.querySelector('.speedUp')
@@ -35,14 +44,14 @@ let shaclesItem = document.querySelector('.Shacles')
 let lifePerBlock = document.querySelector('.lifePerBlock')
 
 // sounds
-function setupBackgroundSound(){
+function setupBackgroundSound() {
     let gameSound = new Audio('./img/sounds/backgroundMusic.mp3');
     gameSound.play()
-    setTimeout(setupBackgroundSound,240000)
+    setTimeout(setupBackgroundSound, 240000)
 }
 
 
-function powerUpSound(){
+function powerUpSound() {
     let powerUp = new Audio('./img/sounds/powerUp.wav');
     powerUp.play()
 }
@@ -74,7 +83,8 @@ lifePerBlock.addEventListener('click', function () {
     if (playerScore >= 100) {
         powerUpSound()
         playerScore -= 100
-        playerLifePerBlock+=1
+        playerLifePerBlock += 1
+        defendingDuration += 20
     }
 })
 
@@ -97,25 +107,29 @@ speedUpStore.addEventListener('click', function () {
         powerUpSound()
         playerScore -= 100
         playerMovementSpeed += 0.5
+        player.attackBox.attackDelay -= 100
     }
 })
 regenUpStore.addEventListener('click', function () {
     if (playerScore >= 100) {
         powerUpSound()
         playerScore -= 100
-        playerRegeneration += 0.2
+        playerRegeneration += 0.5
     }
 })
 
 let isLevelCompleted = true
 function convertHpToScore() {
     if (enemy.dead && isLevelCompleted) {
+        if(!endGame){
+            gameScore += Math.floor(player.health * enemyScoreMultiplier)
+            gameScore += Math.floor(timer * (enemyScoreMultiplier*3.2))
+        }
         playerScore += 100
         gemble.style.display = 'flex'
         isLevelCompleted = false
         enemyCanJump = true
         shaclesItem.style.display = 'flex'
-        // console.log('transfer score')
     } else {
         // console.log('dont transfer score');
     }
@@ -126,10 +140,12 @@ function convertHpToScore() {
 
 function updateDispalyedStats() {
     playerStatSpeed.textContent = String(playerMovementSpeed.toFixed(2))
+    playerAttackSpeed.textContent = (player.attackBox.attackDelay / 1000).toFixed(2) + "s"
     playerDisplayDamage.textContent = playerStartDamage.toFixed(2)
     playerStatArmor.textContent = playerArmour.toFixed(2)
     playerStatRegen.textContent = playerRegeneration.toFixed(2)
-    playerStartRecovery.textContent=playerLifePerBlock.toFixed(2)
+    playerStartRecovery.textContent = playerLifePerBlock.toFixed(2)
+    playerBlockDuration.textContent = (defendingDuration / 1000).toFixed(2) + "s"
 
     enemyStatSpeed.textContent = enemyMovementSpeed.toFixed(2)
     enemyStatDamage.textContent = enemyStartDamage.toFixed(2)
@@ -150,18 +166,21 @@ canvas.height = 576
 
 
 // game Stats Player
+let gameScore = 0
 let playerIsDefending = false
+let defendingDuration = 150;
 let playerCanDefend = true
 let dispalyDefend = false
 let canDodge = true
 let playerScore = 0
-let playerLifePerBlock=3
+let playerLifePerBlock = 3
 let playerMovementSpeed = 5
 let playerStartDamage = 15
 let playerArmour = 3
 let playerRegeneration = 0
 
 // game Stats Enemy
+let enemyScoreMultiplier=1
 let enemyStartDamage = 12
 let enemyMovementSpeed = 5
 let enemyArmor = 2
@@ -354,22 +373,22 @@ function createAttack(xCor, yCor) {
 
 
 
-let cheatBuff=''
+let cheatBuff = ''
 window.addEventListener('keydown', function (e) {
     if (e.key == 'o') {
-        cheatBuff+=e.key
+        cheatBuff += e.key
     }
     if (e.key == 'p') {
-        cheatBuff+=e.key
+        cheatBuff += e.key
     }
-    if(cheatBuff=='op'){
+    if (cheatBuff == 'op') {
         enemy.dead = true;
-        cheatBuff=''
+        cheatBuff = ''
     }
-    if(cheatBuff.length>=2){
-        cheatBuff=''
+    if (cheatBuff.length >= 2) {
+        cheatBuff = ''
     }
-   
+
 })
 let enemy = new Fighter({
     possition: {
@@ -995,7 +1014,7 @@ const keys = {
 }
 // test 
 
-// decreaseTime()
+decreaseTime()
 
 //  computer movement
 function fakeKeyPress(key) {
@@ -1042,12 +1061,12 @@ function nextLevelUpdate() {
     htmlEnemyHealth.innerHTML = Math.ceil(enemy.health)
     htmlPlayerHealth.style.width = enemy.health + '%'
     htmlPlayerHealth.innerHTML = Math.ceil(player.health)
+    enemyScoreMultiplier+=0.5
     enemyArmor += 1
     enemyStartDamage += 0.2
     enemyMovementSpeed += 0.2
     player.dead = false
     isLevelCompleted = true
-
 }
 
 //  test enemies
@@ -1060,9 +1079,11 @@ let enemyMissAttack = 4
 
 let levelCounter = 1
 nextEnemyButton.addEventListener('click', (event) => {
+    timer=60;
     if (enemy.dead) {
         levelCounter++
         if (levelCounter === 2) {
+            enemyScoreMultiplier+=0.1
             enemy = enemyFantasyWarrior
             enemyDoesntMiss = 5
             enemyMissAttack = 5
@@ -1112,12 +1133,12 @@ nextEnemyButton.addEventListener('click', (event) => {
             nextLevelScreen.style.fontSize = '35'
             let newDiv = document.createElement("div")
             newDiv.style.fontSize = '20'
-            newDiv.innerHTML = 'Refresh to start over'
             nextLevelScreen.innerHTML = 'You Won'
-            nextLevelScreen.appendChild(newDiv)
             enemyDoesntMiss = 2
             enemyMissAttack = 2
             nextLevelUpdate()
+            newDiv.innerHTML = `Refresh to play again`
+            nextLevelScreen.appendChild(newDiv)
         }
 
 
@@ -1129,6 +1150,8 @@ nextEnemyButton.addEventListener('click', (event) => {
 })
 
 function animate() {
+    gameScoreDisplay.innerHTML = gameScore
+    if(endGame)return
     window.requestAnimationFrame(animate) // means what animation you are going to loop over
     c.fillStyle = 'black'
     c.fillRect(0, 0, canvas.width, canvas.height)
@@ -1143,30 +1166,40 @@ function animate() {
     }
     player.update()
     updateDamage()
-
     if (enemy.health <= 0) {
         enemy.switchSprite('death')
     }
     if (player.health <= 0) {
         player.switchSprite('death')
+        // endGame = true
+        
     }
     if (!player.dead && !enemy.dead && nextLevelScreen.style.display == 'none') {
         computerAi()
     }
 
     if (enemy.dead) {
-        // updateDispalyedStats()
         nextLevelScreen.style.display = 'flex'
     } else {
         nextLevelScreen.style.display = 'none'
     }
 
+    if(player.dead){
+        if(gameScore>bestScore){
+            localStorage.setItem('BestScore', `${gameScore}`);
+            bestScore=localStorage.getItem('BestScore');
+            playerHighestScoreDisplay.textContent = bestScore
+        }
+        console.log('hes dead');
+        nextLevelScreen.style.display = 'flex'
+        nextLevelScreen.innerHTML='You Lose'
+    }
 
     if (canPlayerAttackIcon) {
         createAttack((player.possition.x - 5), (player.possition.y))
     }
 
-    if(canEnemyAttackIcon){
+    if (canEnemyAttackIcon) {
         createAttack((enemy.possition.x - 5), (enemy.possition.y))
     }
 
@@ -1189,7 +1222,7 @@ function animate() {
     convertHpToScore();
 
 
- 
+
 
 
     player.velocity.x = 0
@@ -1271,10 +1304,10 @@ function animate() {
             }, 300)
             let blockSound = new Audio('./img/sounds/defendSound.wav');
             blockSound.play()
-                player.health+=playerLifePerBlock
-                if(player.health>=100){
-                    player.health=100
-                }
+            player.health += playerLifePerBlock
+            if (player.health >= 100) {
+                player.health = 100
+            }
         }
         enemy.isAttacking = false
         // gsap.to(htmlPlayerHealth,{ width: player.health+'%'})
@@ -1295,9 +1328,24 @@ function animate() {
     if (enemy.health <= 0 || player.health <= 0) {
         // determineWinner({ player, enemy, timerId })
     }
-}
 
-animate()
+
+
+    if(levelCounter === 10&&enemy.dead){
+        console.log('game is over get high Score');
+
+
+        if(gameScore>bestScore){
+            localStorage.setItem('BestScore', `${gameScore}`);
+            bestScore=localStorage.getItem('BestScore');
+            playerHighestScoreDisplay.textContent = bestScore
+        }
+
+        endGame=true
+    }
+}
+    animate()
+
 
 
 // can i attack
@@ -1396,8 +1444,9 @@ window.addEventListener('keydown', (event) => {
                     playerIsDefending = true
                     playerCanDefend = false
                     setTimeout(function () {
-                        window.dispatchEvent(new KeyboardEvent('keyup', { 'key': 'k' }))
-                    }, 100)
+                        keys.k.pressed = false;
+                        playerIsDefending = false
+                    }, defendingDuration)
 
                     setTimeout(function () {
                         playerCanDefend = true
@@ -1495,8 +1544,8 @@ window.addEventListener('keyup', (event) => {
             lastkeyPressTimeA = Date.now()
             break;
         case 'k':
-            keys.k.pressed = false;
-            playerIsDefending = false
+            // keys.k.pressed = false;
+            // playerIsDefending = false
             break;
 
     }
@@ -1531,7 +1580,7 @@ playerRegen();
 let startWindow = document.querySelector('.WelcomeScreen')
 window.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
-        if(!startGame){
+        if (!startGame) {
             setupBackgroundSound()
             startGame = true;
         }

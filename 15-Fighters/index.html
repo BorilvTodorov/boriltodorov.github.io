@@ -11,6 +11,8 @@
   </head>
   <body style="display: flex; align-items: center; justify-content: center">
     <div class="game-wrapper">
+      <div class="game-score-wrapp">Score:<span class="game-score">0</span></div>
+      <div class="game-Highscore-wrapp">Best Score:<span class="Highest-score">0</span></div>
       <!-- <div class="player-attack-cooldown"><img src="/img/sword.png" alt=""></div> -->
       <!-- <div class="player-dodge-cooldown"><img src="/img/dodge.png" alt=""></div> -->
       <div class="WelcomeScreen"> 
@@ -32,7 +34,7 @@
             <div class="image-holder">
               <img src="./img/gold-boots.png" alt="">
             </div>
-            <p>Increases player movement speed by 0.5</p>
+            <p>Increases player movement and attack speed</p>
           </div>
           <!-- Damage -->
           <div class="shop-item-box dmgUp">
@@ -40,7 +42,7 @@
             <div class="image-holder">
               <img src="./img/sword.png" alt="">
             </div>
-            <p>Increases player damage by 1</p>
+            <p>Increases player damage</p>
           </div>
           <!-- Armour -->
           <div class="shop-item-box armorUp">
@@ -48,7 +50,7 @@
             <div class="image-holder">
               <img src="./img/shield.png" alt="">
             </div>
-            <p>Increases player defences by 1</p>
+            <p>Increases player defences</p>
           </div>
           <!-- Regen -->
           <div class="shop-item-box regenUp">
@@ -56,7 +58,7 @@
             <div class="image-holder">
               <img src="./img/regens.png" alt="">
             </div>
-            <p>Increases player life regeneration by 0.2</p>
+            <p>Increases player life regeneration</p>
           </div>
           <!-- shacles -->
           <div class="shop-item-box Shacles">
@@ -72,18 +74,20 @@
             <div class="image-holder lifePerBlock">
               <img src="./img/lifeBlock.png" alt="">
             </div>
-            <p>Increase life gain on block</p>
+            <p>Increase Life gain and block Duration</p>
           </div>
         </div>
         
         <div class="stats-holder">
          <div id="player-stats" class="stats">
           <h3>Player stats</h1>
-            <div class="stat-line"> <div class="img-div"><img src="./img/gold-boots.png" alt=""><strong> Speed</strong></div> <span class="player-speed">1</span></div>
+            <div class="stat-line"> <div class="img-div"><img src="./img/SwordIndicator.png" alt=""><strong>Attack Time</strong></div> <span class="player-attack-delay">1</span></div>
             <div class="stat-line"> <div class="img-div"><img src="./img/sword.png" alt=""><strong>Damage</strong></div> <span class="player-damage" >1</span></div>
+            <div class="stat-line"> <div class="img-div"><img src="./img/regens.png" alt=""><strong>Regen per second</strong></div> <span class="player-regen">1</span></div>
+            <div class="stat-line"> <div class="img-div"><img src="./img/gold-boots.png" alt=""><strong>Speed</strong></div> <span class="player-speed">1</span></div>
+            <div class="stat-line"> <div class="img-div"><img src="./img/lifeBlock.png" alt=""><strong>Life Recovery on block</strong></div> <span class="player-recovery">1</span></div>
             <div class="stat-line"> <div class="img-div"><img src="./img/shield.png" alt=""><strong>Armor</strong></div> <span class="player-armor">1</span></div>
-            <div class="stat-line"> <div class="img-div"><img src="./img/regens.png" alt=""><strong>Regen</strong></div> <span class="player-regen">1</span></div>
-            <div class="stat-line"> <div class="img-div"><img src="./img/lifeBlock.png" alt=""><strong>Recovery</strong></div> <span class="player-recovery">1</span></div>
+            <div class="stat-line"> <div class="img-div"><img src="./img/blockDuration.png" alt=""><strong>Block Duration</strong></div> <span class="player-block-duration">1</span></div>
           </div>
          <div class="level">
           <div class="completedLevels">Completed Levels: <span class="current-level">1</span> </div>
@@ -125,7 +129,7 @@
           <div id="playerHealth">100</div>
         </div>
         <!-- timer -->
-        <div id="timer" class="game-timer">99</div>
+        <div id="timer" class="game-timer">60</div>
         <!-- enemy -->
         <div style="position: relative; width: 100%; height: 30px">
           <div
