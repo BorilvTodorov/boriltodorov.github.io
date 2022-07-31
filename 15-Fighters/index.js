@@ -83,7 +83,7 @@ lifePerBlock.addEventListener('click', function () {
     if (playerScore >= 100) {
         powerUpSound()
         playerScore -= 100
-        playerLifePerBlock += 1
+        playerLifePerBlock += 0.5
         defendingDuration += 20
     }
 })
@@ -173,7 +173,7 @@ let playerCanDefend = true
 let dispalyDefend = false
 let canDodge = true
 let playerScore = 0
-let playerLifePerBlock = 3
+let playerLifePerBlock = 1
 let playerMovementSpeed = 5
 let playerStartDamage = 15
 let playerArmour = 3
