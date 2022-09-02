@@ -9,11 +9,17 @@ const ctx2 = canvasTwo.getContext('2d');
 
 //  Global varaibles
 
-
-const gravity = 1.5
+let animationFrame=0
+let BG=new Image();
+BG.src="./assets/images/BG-1.jpg"
+let BG2=new Image();
+BG2.src="./assets/images/BG-2.jpg"
+let floor=new Image();
+floor.src="./assets/images/FloorBG.png"
+const gravity = 1.1
 const worldSize = 500
-const jumpHeight = 22
-const playerSpeed = 5
+const jumpHeight = 18
+const playerSpeed = 4
 let playerCanJump = true
 const jumpCooldown = 600
 canvasOne.width = worldSize
@@ -45,8 +51,11 @@ class Player {
     constructor(ctx, left) {
         this.velocityY = 0
         this.velocityX = 0
-        this.width = 50
-        this.height = 50
+        this.spriteWidth = 31
+        this.spriteHeight = 49
+        this.frameX = 0
+        this.width = this.spriteWidth+5
+        this.height =  this.spriteHeight+1
         this.x = 10
         this.y = 10
         this.ctx = ctx
@@ -57,14 +66,24 @@ class Player {
         this.regularColor = '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
         this.collissionWithCube = false
         this.collissionWithDoor = false
+        this.image = new Image();
+        this.image.src = "./assets/images/LammaRight.png"
     }
 
     draw() {
         this.ctx.fillStyle = this.color
-        this.ctx.fillRect(this.x, this.y, this.width, this.height)
+        // this.ctx.fillRect(this.x, this.y, this.width, this.height)
+        this.ctx.drawImage(this.image, this.frameX * this.spriteWidth, 0, this.spriteWidth,this.spriteHeight, this.x, this.y, this.width, this.height)
+    
+
     }
 
     update() {
+
+        if(animationFrame%8==0){
+            this.frameX++
+            if(this.frameX>7) this.frameX=0
+        }
         //  jump
         this.x += this.velocityX
         this.y += this.velocityY
@@ -85,10 +104,11 @@ class Player {
         if (this.left) {
             if (keys.ArrowRight.pressed) {
                 this.x + this.width < worldSize ? this.velocityX = playerSpeed : this.velocityX = 0
+                    this.image.src = "./assets/images/LammaRight.png"
 
             } else if (keys.ArrowLeft.pressed) {
                 this.x > 0 ? this.velocityX = -playerSpeed : this.velocityX = 0
-
+                this.image.src = "./assets/images/LammaLeft.png"
             } else {
                 this.velocityX = 0
             }
@@ -98,8 +118,10 @@ class Player {
         if (!this.left) {
             if (keys.ArrowRight.pressed) {
                 this.x > 0 ? this.velocityX = -playerSpeed : this.velocityX = 0
+                this.image.src = "./assets/images/LammaLeft.png"
             } else if (keys.ArrowLeft.pressed) {
                 this.x + this.width < worldSize ? this.velocityX = playerSpeed : this.velocityX = 0
+                this.image.src = "./assets/images/LammaRight.png"
             } else {
                 this.velocityX = 0
             }
@@ -118,6 +140,7 @@ class Player {
 
 const player1 = new Player(ctx1, true)
 const player2 = new Player(ctx2, false)
+player2.x=450
 
 
 
@@ -132,13 +155,59 @@ class Block {
         this.height = h
         this.ctx = ctx
         this.color = 'white'
+        this.image=new Image()
+        this.image.src="./assets/images/Tile.png"
     }
 
     draw() {
         this.ctx.fillStyle = this.color
-        this.ctx.fillRect(this.x, this.y, this.width, this.height)
+        // this.ctx.fillRect(this.x, this.y, this.width, this.height)
+        this.ctx.drawImage(this.image,this.x, this.y, this.width, this.height)
     }
 }
+
+class Box {
+    constructor(ctx, x, y, w, h) {
+        this.x = x
+        this.y = y
+        this.velocityX=0
+        this.velocityY=0
+        this.width = w
+        this.height = h
+        this.ctx = ctx
+        this.color = 'white'
+        this.image=new Image()
+        this.image.src="./assets/images/Block.png"
+    }
+
+    draw() {
+        this.ctx.fillStyle = this.color
+        // this.ctx.fillRect(this.x, this.y, this.width, this.height)
+        this.ctx.drawImage(this.image,this.x, this.y, this.width, this.height)
+    }
+    update(){
+        if(this.x+this.width >=worldSize){
+            this.velocityX=0
+        }else if(this.x<=0)this.velocityX=0
+        this.x += this.velocityX
+        this.y += this.velocityY
+        
+        if (this.y + this.height + this.velocityY <= worldSize) {
+            this.velocityY += gravity
+        } else {
+            this.velocityY = 0
+        }
+
+
+        if (this.y < 0) {
+            this.y = 0
+            this.velocityY = 0
+        }
+
+    }
+}
+
+
 
 
 
@@ -155,13 +224,14 @@ class Door {
     draw() {
         this.ctx.fillStyle = this.color
         this.ctx.fillRect(this.x, this.y, this.width, this.height)
+        
     }
 }
 
 
 
-let playerDoorOne=new Door(ctx1, 430, 250, 20, 20)
-let playerDoorTwo=new Door(ctx2, 30, 250, 20, 20)
+let playerDoorOne = new Door(ctx1, 450, 280, 20, 20)
+let playerDoorTwo = new Door(ctx2, 30, 280, 20, 20)
 
 
 
@@ -171,82 +241,110 @@ let playerDoorTwo=new Door(ctx2, 30, 250, 20, 20)
 // borders
 
 // new Block(Canvas, X, Y, Width, Height))
-let leftWorld = []
+let leftWorldPlatforms = []
+let boxesLeft = []
 
-leftWorld.push(new Block(ctx1, 0, 70, 300, 5))
-leftWorld.push(new Block(ctx1, 200, 150, 300, 5))
+leftWorldPlatforms.push(new Block(ctx1, 0, 120, 220, 20))
+leftWorldPlatforms.push(new Block(ctx1, 300, 180, 60, 20))
+leftWorldPlatforms.push(new Block(ctx1, 120, 290, 180, 20))
 
-leftWorld.push(new Block(ctx1, 400, 210, 100, 5))
-leftWorld.push(new Block(ctx1, 400, 320, 100, 5))
+leftWorldPlatforms.push(new Block(ctx1, 420, 210, 80, 20))
+leftWorldPlatforms.push(new Block(ctx1, 420, 320, 80, 20))
 
-
-leftWorld.push(new Block(ctx1, 130, 320, 80, 100))
-leftWorld.push(new Block(ctx1, 0, 420, 300, 5))
-
-
+leftWorldPlatforms.push(new Block(ctx1, 0, 420, 180, 20))
 
 
+
+
+let boxLeftOne=new Box(ctx1, 140, 0, 60, 60)
+boxesLeft.push(boxLeftOne)
 
 
 
 // right World
 // borders
-let rightWorld = []
+let rightWorldPlatforms = []
+let boxesRight = []
 
-rightWorld.push(new Block(ctx2, 200, 70, 300, 5))
-rightWorld.push(new Block(ctx2, 0, 150, 300, 5))
+rightWorldPlatforms.push(new Block(ctx2, 280, 120, 220, 20))
+rightWorldPlatforms.push(new Block(ctx2, 140, 180, 60, 20))
+rightWorldPlatforms.push(new Block(ctx2, 200, 280, 150, 20))
 
-rightWorld.push(new Block(ctx2, 0, 210, 100, 5))
-rightWorld.push(new Block(ctx2, 0, 320, 100, 5))
+rightWorldPlatforms.push(new Block(ctx2, 0, 210, 80, 20))
+rightWorldPlatforms.push(new Block(ctx2, 0, 320, 80, 20))
 
+rightWorldPlatforms.push(new Block(ctx2, 320, 420, 180, 20))
 
-rightWorld.push(new Block(ctx2, 250, 320, 80, 100))
-rightWorld.push(new Block(ctx2, 200, 420, 300, 5))
-
+let boxRightOne=new Box(ctx2, 300, 0, 60, 60)
+boxesRight.push(boxRightOne)
 
 
 
 function animate() {
+    animationFrame++
     clearCanvas()
-    player1.draw()
-    player1.update()
-    player2.draw()
-    player2.update()
 
+    drawBackground(ctx1)
+    drawBackgroundTwo(ctx2)
+    
+   
     //  block collission
-    leftWorld.forEach(block => {
+    leftWorldPlatforms.forEach(block => {
         // collission(player,block,keys,left,right)
         block.draw()
         collission(player1, block, keys.ArrowRight.pressed, keys.ArrowLeft.pressed)
+        boxCollission(block,boxesLeft)
+        
+    })
+    boxesLeft.forEach(box=>{
+        box.draw()
+        box.update()
+        moveBox(player1, box, keys.ArrowRight.pressed, keys.ArrowLeft.pressed)
     })
 
-    rightWorld.forEach(block => {
+
+
+
+    rightWorldPlatforms.forEach(block => {
         // collission(player,block,keys,left,right)
         block.draw()
         collission(player2, block, keys.ArrowLeft.pressed, keys.ArrowRight.pressed)
+        boxCollission(block,boxesRight)
+        
     })
 
+    boxesRight.forEach(box=>{
+        box.draw()
+        box.update()
+        moveBox(player2, box, keys.ArrowLeft.pressed, keys.ArrowRight.pressed)
+    })
+    
 
     //  win condition
     playerDoorOne.draw()
     playerDoorTwo.draw()
 
-        checkForCollission(playerDoorOne, player1) ? player1.collissionWithDoor = true  : player1.collissionWithDoor = false
-        checkForCollission(playerDoorTwo, player2) ? player2.collissionWithDoor = true  : player2.collissionWithDoor = false
-        if(player1.collissionWithDoor&&player2.collissionWithDoor){
-            ctx1.font = '50px serif';
-            ctx2.font = '50px serif';
-            ctx1.clearRect(0, 0, worldSize, worldSize)
-            ctx2.clearRect(0, 0, worldSize, worldSize)
-            ctx1.fillText('You',400,250)
-            ctx2.fillText('Win',10,250)
-            return   
-        }else{
-            player1.collissionWithDoor = false 
-            player2.collissionWithDoor = false 
-        }
+    
+    checkForCollission(playerDoorOne, player1) ? player1.collissionWithDoor = true : player1.collissionWithDoor = false
+    checkForCollission(playerDoorTwo, player2) ? player2.collissionWithDoor = true : player2.collissionWithDoor = false
+    if (player1.collissionWithDoor && player2.collissionWithDoor) {
+        ctx1.font = '50px serif';
+        ctx2.font = '50px serif';
+        ctx1.clearRect(0, 0, worldSize, worldSize)
+        ctx2.clearRect(0, 0, worldSize, worldSize)
+        ctx1.fillText('You', 400, 250)
+        ctx2.fillText('Win', 10, 250)
+        return
+    } else {
+        player1.collissionWithDoor = false
+        player2.collissionWithDoor = false
+    }
 
 
+    player1.draw()
+    player1.update()
+    player2.draw()
+    player2.update()
 
     requestAnimationFrame(animate)
 }
@@ -354,7 +452,7 @@ function collission(player, block, keysLeft, keysRight) {
         } else { player.collissionWithCube = false }
     }
 
-    // leftWorld collission left
+    // leftWorldPlatforms collission left
     if (keysLeft &&
         player.x + player.width + player.velocityX >= block.x &&
         player.y + player.height >= block.y &&
@@ -363,7 +461,7 @@ function collission(player, block, keysLeft, keysRight) {
     ) {
         player.velocityX = 0
     }
-    // leftWorld collission right
+    // leftWorldPlatforms collission right
     if (keysRight &&
         player.x + player.velocityX <= block.x + block.width &&
         player.y + player.height >= block.y &&
@@ -373,7 +471,7 @@ function collission(player, block, keysLeft, keysRight) {
         player.velocityX = 0
 
     }
-    // leftWorld collission bot
+    // leftWorldPlatforms collission bot
     if (
         player.x + player.width + player.velocityX >= block.x &&
         player.x <= block.x + block.width &&
@@ -399,4 +497,77 @@ function checkForCollission(rect1, rect2) {
     } else {
         return true
     }
+}
+
+function drawBackground(ctx){
+    ctx.drawImage(BG,0,0,worldSize,worldSize)
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.3)'
+    // ctx.fillStyle = 'rgba(255, 255, 255, 0.6)'
+    ctx.fillRect(0, 0, worldSize, worldSize)
+}
+function drawBackgroundTwo(ctx){
+    ctx.drawImage(BG2,0,0,worldSize,worldSize)
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.3)'
+    // ctx.fillStyle = 'rgba(255, 255, 255, 0.6)'
+    ctx.fillRect(0, 0, worldSize, worldSize)
+}
+
+
+
+
+
+function moveBox(player, box, keysLeft, keysRight) {
+    // collission top
+    box.velocityX=0
+    if (player.y + player.height <= box.y &&
+        player.y + player.height + player.velocityY >= box.y &&
+        player.x + player.width + player.velocityX >= box.x &&
+        player.x <= box.x + box.width) {
+            
+            player.velocityY = 0
+            player.collissionWithCube = true
+        if (box.height > 30) {
+        } else { player.collissionWithCube = false }
+    }
+
+    if (keysLeft &&
+        player.x + player.width >= box.x &&
+        player.y + player.height >= box.y &&
+        player.y <= box.y + box.height &&
+        player.x + player.width <= box.x + box.width
+    ) {
+    
+        if(player.x+player.width>box.x){
+            player.x =box.x-player.width
+        }
+        box.velocityX=player.velocityX
+    }
+    if (keysRight &&
+        player.x + player.velocityX <= box.x + box.width &&
+        player.y + player.height >= box.y &&
+        player.y <= box.y + box.height &&
+        player.x >= box.x
+    ) {
+        if(player.x<box.x+box.width){
+            player.x =box.x+box.width
+        }
+        box.velocityX=player.velocityX
+
+    }
+   
+    
+
+}
+
+
+
+function boxCollission(platform,array) {
+    array.forEach(box=>{
+    if (box.y + box.height <= platform.y &&
+        box.y + box.height + box.velocityY >= platform.y &&
+        box.x + box.width + box.velocityX >= platform.x &&
+        box.x <= platform.x + platform.width) {
+        box.velocityY = 0
+    }
+})
 }
