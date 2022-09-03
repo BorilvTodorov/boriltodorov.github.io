@@ -11,7 +11,7 @@ const ctx2 = canvasTwo.getContext('2d');
 //  Global varaibles
 let gameOver=false
 let loadNextLevel = true
-let currentLevel =2
+let currentLevel =0
 let animationFrame = 0
 let BG = new Image();
 BG.src = "./assets/images/BG-1.jpg"
