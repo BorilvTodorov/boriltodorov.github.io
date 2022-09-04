@@ -2,6 +2,57 @@ body {
   background-color: rgb(45, 2, 102);
   padding: 0;
   margin: 0;
+  background-color: #171719;
+    background-image: linear-gradient(
+        30deg,
+        #000 12%,
+        transparent 12.5%,
+        transparent 87%,
+        #000 87.5%,
+        #000
+      ),
+      linear-gradient(
+        150deg,
+        #000 12%,
+        transparent 12.5%,
+        transparent 87%,
+        #000 87.5%,
+        #000
+      ),
+      linear-gradient(
+        30deg,
+        #000 12%,
+        transparent 12.5%,
+        transparent 87%,
+        #000 87.5%,
+        #000
+      ),
+      linear-gradient(
+        150deg,
+        #000 12%,
+        transparent 12.5%,
+        transparent 87%,
+        #000 87.5%,
+        #000
+      ),
+      linear-gradient(
+        60deg,
+        #111111 25%,
+        transparent 25.5%,
+        transparent 75%,
+        #111111 75%,
+        #111111
+      ),
+      linear-gradient(
+        60deg,
+        #111111 25%,
+        transparent 25.5%,
+        transparent 75%,
+        #111111 75%,
+        #111111
+      );
+    background-size: 80px 140px;
+    background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
 }
 li{
   transition: all 300ms;
@@ -150,3 +201,5 @@ h2 {
     justify-content: space-between;
   }
 }
+
+/*  new Styles here */
