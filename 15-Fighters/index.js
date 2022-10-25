@@ -46,13 +46,16 @@ let lifePerBlock = document.querySelector('.lifePerBlock')
 // sounds
 function setupBackgroundSound() {
     let gameSound = new Audio('./img/sounds/backgroundMusic.mp3');
+    gameSound.volume =0.4
     gameSound.play()
+    
     setTimeout(setupBackgroundSound, 240000)
 }
 
 
 function powerUpSound() {
     let powerUp = new Audio('./img/sounds/powerUp.wav');
+    powerUp.volume =0.2
     powerUp.play()
 }
 
@@ -1303,6 +1306,7 @@ function animate() {
                 dispalyDefend = false
             }, 300)
             let blockSound = new Audio('./img/sounds/defendSound.wav');
+            blockSound.volume =0.2
             blockSound.play()
             player.health += playerLifePerBlock
             if (player.health >= 100) {
@@ -1424,6 +1428,7 @@ window.addEventListener('keydown', (event) => {
                 let playerDelay = player.attackBox.attackDelay
                 if (ElpsPlayerAttTime > playerDelay || playerCoolDown > playerDelay) {
                     let newAttack = new Audio('./img/sounds/swosh.wav');
+                    newAttack.volume =0.1
                     newAttack.play()
                     player.attack();
 
@@ -1515,6 +1520,7 @@ window.addEventListener('keyup', (event) => {
             keys.d.pressed = false
             if (!player.isAttacking && player.possition.x < 750 && (Date.now() - lastkeyPressTimeD) <= 180 && canDodge) {
                 let dodgeSound = new Audio('./img/sounds/dash.wav');
+                dodgeSound.volume =0.1
                 dodgeSound.play()
                 player.possition.x += 200
                 canDodge = false
@@ -1532,6 +1538,7 @@ window.addEventListener('keyup', (event) => {
             keys.a.pressed = false
             if (!player.isAttacking && player.possition.x > 155 && (Date.now() - lastkeyPressTimeA) <= 180 && canDodge) {
                 let dodgeSound = new Audio('./img/sounds/dash.wav');
+                dodgeSound.volume =0.2
                 dodgeSound.play()
                 player.possition.x -= 200
                 canDodge = false

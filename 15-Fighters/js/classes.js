@@ -132,6 +132,7 @@ class Fighter extends Sprite {
 
     takeHit(damage) {
         let takeLife = new Audio('./img/sounds/takeLife.wav');
+        takeLife.volume=0.1
         takeLife.play()
         this.health -= damage
         if (!this.isAttacking) {
@@ -205,6 +206,7 @@ class Fighter extends Sprite {
                     this.framesMax = this.sprites.death.framesMax
                     this.framesCurrent = 0
                     let deadSound = new Audio('./img/sounds/death.wav');
+                    deadSound.volume=0.1
                     deadSound.play()
                 }
                 break;
