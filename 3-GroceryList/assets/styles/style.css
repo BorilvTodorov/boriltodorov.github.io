@@ -2,8 +2,58 @@ body{
     font-size:15px;
     display: flex;
     justify-content: center;
-    background-color: rgb(77, 0, 57);
-    color: rgb(77, 0, 57);
+     background-color: #171719;
+    background-image: linear-gradient(
+        30deg,
+        #000 12%,
+        transparent 12.5%,
+        transparent 87%,
+        #000 87.5%,
+        #000
+      ),
+      linear-gradient(
+        150deg,
+        #000 12%,
+        transparent 12.5%,
+        transparent 87%,
+        #000 87.5%,
+        #000
+      ),
+      linear-gradient(
+        30deg,
+        #000 12%,
+        transparent 12.5%,
+        transparent 87%,
+        #000 87.5%,
+        #000
+      ),
+      linear-gradient(
+        150deg,
+        #000 12%,
+        transparent 12.5%,
+        transparent 87%,
+        #000 87.5%,
+        #000
+      ),
+      linear-gradient(
+        60deg,
+        #111111 25%,
+        transparent 25.5%,
+        transparent 75%,
+        #111111 75%,
+        #111111
+      ),
+      linear-gradient(
+        60deg,
+        #111111 25%,
+        transparent 25.5%,
+        transparent 75%,
+        #111111 75%,
+        #111111
+      );
+    background-size: 80px 140px;
+    background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+    color: rgb(0, 0, 0);
 }
 
 .app-wrapper{
@@ -41,12 +91,12 @@ body{
 }
 
 .alert-fail{
-    color: rgb(77, 0, 57);
+    color: rgb(189, 9, 141);
     background: rgb(243, 97, 97);
     padding: 10px;
 }
 .alert-success{
-    color: rgb(77, 0, 57);
+    color: rgb(189, 9, 141);
     background: rgb(168, 238, 203);
     padding: 10px;
 }
@@ -62,21 +112,21 @@ body{
 .delete-btn{
     border: none;
     background: transparent;
-    color: rgb(77, 0, 57);
+    color: rgb(189, 9, 141);
     font-size: 20px;
 }
 
 .edit-btn{
     border: none;
     background: transparent;
-    color: rgb(77, 0, 57);
+    color: rgb(189, 9, 141);
     font-size: 20px;
 }
 .clear-btn{
     margin-top:20px;
     border: none;
     background: transparent;
-    color: rgb(77, 0, 57);
+    color: rgb(189, 9, 141);
     font-size: 20px;
     text-transform: capitalize;
     text-align: center;
@@ -84,16 +134,16 @@ body{
 
 .submit-btn{
     background-color: white;
-    color: rgb(77, 0, 57);
+    color: rgb(189, 9, 141);
     font-size: 20px;
 }
 .form-control input{
     font-size: 20px;
-    color: rgb(77, 0, 57);
+    color: rgb(189, 9, 141);
 
 }
 .form-control label{
     font-size: 20px;
-    color: rgb(77, 0, 57);
+    color: rgb(189, 9, 141);
 
 }

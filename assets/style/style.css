@@ -3,63 +3,62 @@ body {
   padding: 0;
   margin: 0;
   background-color: #171719;
-    background-image: linear-gradient(
-        30deg,
-        #000 12%,
-        transparent 12.5%,
-        transparent 87%,
-        #000 87.5%,
-        #000
-      ),
-      linear-gradient(
-        150deg,
-        #000 12%,
-        transparent 12.5%,
-        transparent 87%,
-        #000 87.5%,
-        #000
-      ),
-      linear-gradient(
-        30deg,
-        #000 12%,
-        transparent 12.5%,
-        transparent 87%,
-        #000 87.5%,
-        #000
-      ),
-      linear-gradient(
-        150deg,
-        #000 12%,
-        transparent 12.5%,
-        transparent 87%,
-        #000 87.5%,
-        #000
-      ),
-      linear-gradient(
-        60deg,
-        #111111 25%,
-        transparent 25.5%,
-        transparent 75%,
-        #111111 75%,
-        #111111
-      ),
-      linear-gradient(
-        60deg,
-        #111111 25%,
-        transparent 25.5%,
-        transparent 75%,
-        #111111 75%,
-        #111111
-      );
-    background-size: 80px 140px;
-    background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+  background-image: linear-gradient(
+      30deg,
+      #000 12%,
+      transparent 12.5%,
+      transparent 87%,
+      #000 87.5%,
+      #000
+    ),
+    linear-gradient(
+      150deg,
+      #000 12%,
+      transparent 12.5%,
+      transparent 87%,
+      #000 87.5%,
+      #000
+    ),
+    linear-gradient(
+      30deg,
+      #000 12%,
+      transparent 12.5%,
+      transparent 87%,
+      #000 87.5%,
+      #000
+    ),
+    linear-gradient(
+      150deg,
+      #000 12%,
+      transparent 12.5%,
+      transparent 87%,
+      #000 87.5%,
+      #000
+    ),
+    linear-gradient(
+      60deg,
+      #111111 25%,
+      transparent 25.5%,
+      transparent 75%,
+      #111111 75%,
+      #111111
+    ),
+    linear-gradient(
+      60deg,
+      #111111 25%,
+      transparent 25.5%,
+      transparent 75%,
+      #111111 75%,
+      #111111
+    );
+  background-size: 80px 140px;
+  background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
 }
-li{
+li {
   transition: all 300ms;
 }
-li:hover{
+li:hover {
   color: rgb(37, 171, 216);
-  
 }
 a {
   color: rgb(37, 165, 216);
@@ -101,7 +100,7 @@ h2 {
   border: solid 2px rgb(37, 165, 216);
   transition: all 500ms;
 }
-.box-holder:hover{
+.box-holder:hover {
   transform: scale(1.1);
 }
 .box-holder-span {
@@ -111,7 +110,7 @@ h2 {
   position: absolute;
   width: 100%;
   bottom: 0;
-  background: linear-gradient(#ffffff,#1d75be);
+  background: linear-gradient(#ffffff, #1d75be);
   padding: 10px;
 }
 
@@ -138,8 +137,8 @@ h2 {
   text-transform: capitalize;
 }
 
-.links a:hover{
- color: aquamarine;
+.links a:hover {
+  color: aquamarine;
 }
 .show-links {
   display: flex;
@@ -148,7 +147,7 @@ h2 {
 }
 
 .nav-header img {
-  width: 85px;
+  width: 65px;
   border-radius: 50%;
 }
 
@@ -156,7 +155,7 @@ h2 {
   padding: 0 30px;
   margin-top: 20px;
 }
-.active{
+.active {
   color: rgb(37, 165, 216);
   font-size: 20px;
   text-decoration: none;
@@ -164,11 +163,28 @@ h2 {
   transition-duration: 300ms;
   text-transform: capitalize;
 }
-.grid-container{
+.grid-container {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(340px, 2fr));
   grid-gap: 15px;
+}
+.tag-holder {
+  font-size: 25px;
+  position: absolute;
+  align-items: start;
+  display: flex;
+  gap: 5px;
+  top: 6px;
+  left: 10px;
+  width: 100%;
+}
+.icons-holder img{
+  width: 100%;
+}
+.icons-holder {
+ width:22px;
+ height:22px;
 }
 
 @media screen and (min-width: 800px) {
