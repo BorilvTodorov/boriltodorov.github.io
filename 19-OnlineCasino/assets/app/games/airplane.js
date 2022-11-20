@@ -105,12 +105,19 @@ export function airplaneTrigger(e) {
     }
     let animateFrame = 0
 
-
-
-
     const airPlane = new Airplane(10, canvas.height)
-    function animate() {
+
+    let lastTime=0
+    const frameFix=19
+    let frameRate=0
+    function animate(timestamp) {
         animateFrame++
+        let deltaTime=timestamp - lastTime
+        lastTime=timestamp
+        frameRate+=deltaTime
+        if(frameRate>=frameFix){ // fix Frames
+            frameRate=0
+        
 
         airPlane.update()
         backgroundX -= 0.1
@@ -164,10 +171,10 @@ export function airplaneTrigger(e) {
             updateMoney(sessionStorage.id, Number(sessionStorage.money))
             return
         }
-
+    }
         requestAnimationFrame(animate)
     }
-    animate()
+    animate(0)
 
     stopButton.addEventListener('click', (e) => {
         e.target.style.display = 'none'
