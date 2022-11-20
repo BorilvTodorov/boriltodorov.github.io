@@ -116,8 +116,6 @@ export function airplaneTrigger(e) {
         backgroundX -= 0.1
         ctx.clearRect(0, 0, canvas.width, canvas.height)
         ctx.drawImage(backgroundImg, backgroundX, 0, 900, 601,)
-
-        console.log(particlesArray.length)
         if (animateFrame % 7 == 0) {
             createParticle(airPlane.x +14, airPlane.y - 44)
         } else if(animateFrame % 14 == 0){
@@ -176,7 +174,6 @@ export function airplaneTrigger(e) {
         airPlane.hasPlayerStopped = true
         winnings = playerBet * airPlane.altitude
         currentPayout.textContent = winnings.toFixed(2)
-        console.log(currentPayout.textContent)
     })
 
     function randomNumber(min, max) {
