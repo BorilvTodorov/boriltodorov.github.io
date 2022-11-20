@@ -59,7 +59,7 @@ export function airplaneTrigger(e) {
             this.y = y
             this.w = 130
             this.h = 150
-            this.velocity = 0.1
+            this.velocity = 0.2
             this.hasCrashed = false
             this.hasPlayerStopped = false
             this.altitude = 0
@@ -169,6 +169,21 @@ export function airplaneTrigger(e) {
             balance.textContent = (Number(balance.textContent) + Number(currentPayout.textContent)).toFixed(2)
             sessionStorage.money = balance.textContent
             updateMoney(sessionStorage.id, Number(sessionStorage.money))
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+        ctx.fillStyle = "white";
+        ctx.font = '25px Comic Sans MS';
+        ctx.fillText(`Rocket flew Away`, 350, 300);
+
+        ctx.fillStyle = "white";
+        ctx.font = '25px Comic Sans MS';
+        ctx.fillText(`Closed at ${currentPayout.textContent}$`, 380, 40);
+
+
+        ctx.fillStyle = "white";
+        ctx.font = '25px Comic Sans MS';
+        ctx.fillText(`Payout ${(playerBet * airPlane.altitude).toFixed(2)}$`, 400, 570);
             return
         }
     }

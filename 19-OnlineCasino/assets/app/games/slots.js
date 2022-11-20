@@ -47,7 +47,7 @@ export function slots(e) {
             this.x = x
             this.y = y
             this.size = 120
-            this.velocity = 15
+            this.velocity = 18
             this.image = new Image()
             this.image.src = "./assets/images/slotCrate.png"
             this.requestedStop = false
@@ -193,10 +193,20 @@ export function slots(e) {
     }
 
 
-    function animate() {
+
+    let lastTime=0
+    const frameFix=19
+    let frameRate=0
+    function animate(timestamp) {
         if (gameFinished) {
             return
         }
+
+        let deltaTime=timestamp - lastTime
+        lastTime=timestamp
+        frameRate+=deltaTime
+        if(frameRate>=frameFix){//fixed frames
+            frameRate=0
 
         ctx.clearRect(0, 0, canvas.width, canvas.height)
         // slot One
@@ -217,8 +227,7 @@ export function slots(e) {
         ctx.fillStyle = "white";
         ctx.font = '35px Comic Sans MS';
         ctx.fillText(`x`, 40, 20);
-        requestAnimationFrame(animate)
-
+        
         if (slotColumnFive.childElementCount >= 5) {
             gameFinished = true
             ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -233,7 +242,9 @@ export function slots(e) {
             updateMoney(sessionStorage.id, Number(sessionStorage.money))
         }
     }
-    animate()
+    requestAnimationFrame(animate)
+    }
+    animate(0)
 
     function addToResultArray(set, el) {
         if (el.velocity == 0) {
