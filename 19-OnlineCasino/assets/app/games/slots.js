@@ -58,7 +58,7 @@ export function slots(e) {
         }
         update() {
             if (this.requestedStop && this.velocity > 0) {
-                this.velocity -= 0.1
+                this.velocity -= 0.4
 
                 if (this.velocity < 0) {
                     this.velocity = 0
