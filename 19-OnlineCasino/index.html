@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Live Casino</title>
+    <script src="./assets/app/app.js" type="module"></script>
+    <link rel="stylesheet" href="./assets/styles/style.css" />
+  </head>
+
+  <body class="flexColumn">
+    <section class="nav-section flexRow">
+      <nav class="navBar">
+        <ul class="flexRow">
+          <li>
+            <a href=""> <div class="profile flexRow">BT</div></a>
+          </li>
+          <li id="home"><a href="">Home</a></li>
+          <li id="games"><a href="">Games</a></li>
+          <li id="register"><a href="">Register</a></li>
+          <li id="login"><a href="">Login</a></li>
+          <li id="logout"><a href="">Logout</a></li>
+        </ul>
+      </nav>
+
+      <button class="backToHome">Back</button>
+      <div class="balanceContainer flexRow">
+        <p>Current Balance</p>
+        <div>
+          <span>$</span>
+          <span id="balance">100</span>
+        </div>
+      </div>
+    </section>
+
+    <main class="home flexColumn">
+      <h1>World's leading online gambling platform</h1>
+      <img src="./assets/images/homeView.jpg" alt="" />
+      <!-- <button class="homePlay flexRow">
+        <i class="fa-solid fa-play"></i> Play
+      </button> -->
+    </main>
+
+    <section class="login">
+      <form class="flexColumn">
+        <label for="uname"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="name" required />
+
+        <label for="psw"><b>Password</b></label>
+        <input
+          type="password"
+          placeholder="Enter Password"
+          name="password"
+          required
+        />
+
+        <button type="submit">Login</button>
+      </form>
+    </section>
+
+    <section class="register">
+      <form class="flexColumn">
+        <label for="uname"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="name" required />
+
+        <label for="psw"><b>Password</b></label>
+        <input
+          type="password"
+          placeholder="Enter Password"
+          name="password"
+          required
+        />
+
+        <label for="psw"><b>Repeat Password</b></label>
+        <input
+          type="password"
+          placeholder="Enter Password"
+          name="rePass"
+          required
+        />
+
+        <button type="submit">Register</button>
+      </form>
+    </section>
+
+    <section class="games gridView">
+      <div id="airplane" class="gameCard">
+        <div class="gameImg flexRow">
+          <img src="./assets/images/./rocketGame.PNG" alt="" />
+        </div>
+        <div class="contextHolder flexColumn">
+          <h1>Rocket-Man</h1>
+          <span>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </span>
+          <p>Bet and see where the Rocket-Man takes you!</p>
+          <button>Play</button>
+        </div>
+      </div>
+
+      <!-- <div id="dice" class="gameCard">
+        <div class="gameImg flexRow">
+          <img src="./assets/images/homeView.jpg" alt="" />
+        </div>
+        <div class="contextHolder flexColumn">
+          <h1>Roll the Dice</h1>
+          <span>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </span>
+
+          <p>
+            Bet against the Dealer. Highest roll wins!
+          </p>
+          <button>Play</button>
+        </div>
+      </div> -->
+      <div id="slots" class="gameCard">
+        <div class="gameImg flexRow">
+          <img src="./assets/images/slotsBgImg.PNG" alt="" />
+        </div>
+        <div class="contextHolder flexColumn">
+          <h1>Jungle slots</h1>
+          <span>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </span>
+          <p>
+          Bet and spin
+          </p>
+          <button>Play</button>
+        </div>
+      </div>
+    </section>
+
+    <main class="playGame flexColumn">
+      <!-- Airplane Game -->
+      <div class="airplane flexColumn">
+        <h1>Rocket Ship</h1>
+        <canvas class="airplaneCanvas"> </canvas>
+        <div class="flexRow betSection">
+          <div class="flexColumn">
+            <label for="psw"><b>Place bet</b></label>
+            <input class="currentBet" name="bet" type="text" />
+          </div>
+          <div class="flexColumn">
+            <button class="airplanePlay">Play</button>
+            <button class="airplaneStop">Stop</button>
+          </div>
+        </div>
+
+        <div style="display: none" class="flexRow betSection">
+          <h2>Current Payout: <span class="currentPayout">0</span></h2>
+        </div>
+      </div>
+
+      <!-- Dice Game -->
+      <div class="dice flexColumn">
+        <h1>Dice Game</h1>
+        <canvas class="diceCanvas"></canvas>
+        <div class="flexRow betSection">
+          <input type="text" />
+          <button>Play</button>
+        
+        </div>
+
+      </div>
+
+      <div class="slots flexColumn">
+        <div class="slotScreen flexRow">
+          <div class="slotColumnOne">
+          </div>
+          <div class="slotColumnTwo">
+          </div>
+          <div class="slotColumnThree">
+          </div>
+          <div class="slotColumnFour">
+          </div>
+          <div class="slotColumnFive">
+          </div>
+        </div>
+        <p>Hello Alert</p>
+        <canvas class="slotsCanvas"> </canvas>
+        <div class='flexRow slotStops'>
+          <button class="slotStopOne">STOP</button>
+          <button class="slotStopTwo">STOP</button>
+          <button class="slotStopThree">STOP</button>
+          <button class="slotStopFour">STOP</button>
+          <button class="slotStopFive">STOP</button>
+        </div>
+        <div class="flexColumn betSection">
+          <h3 style="margin:5px">Place your Bet</h3>
+          <input class="slotsBet" type="text" />
+
+          <button class="slotsStartGame">Start Game</button>
+          <h2>Last Payout: <span class="slotsPayout">0</span></h2>
+        </div>
+      </div>
+    </main>
+
+    <section class="footer flexColumn">
+      <div class="logos flexRow">
+        <i class="fa-brands fa-google"></i>
+        <i class="fa-brands fa-facebook"></i>
+        <i class="fa-brands fa-instagram"></i>
+        <i class="fa-brands fa-twitch"></i>
+        <i class="fa-brands fa-youtube"></i>
+      </div>
+      <p>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium,
+        asperiores?
+      </p>
+      <div class="flexRow"><a>Lorem</a><a>Lorem</a></div>
+    </section>
+
+    <script
+      src="https://kit.fontawesome.com/92de7bc6d5.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
