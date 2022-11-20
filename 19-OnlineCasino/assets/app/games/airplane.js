@@ -170,11 +170,14 @@ export function airplaneTrigger(e) {
             sessionStorage.money = balance.textContent
             updateMoney(sessionStorage.id, Number(sessionStorage.money))
 
-        ctx.clearRect(0, 0, canvas.width, canvas.height)
+            
 
-        ctx.fillStyle = "white";
-        ctx.font = '25px Comic Sans MS';
-        ctx.fillText(`Rocket flew Away`, 350, 300);
+            ctx.fillStyle = "MediumSlateBlue";
+            ctx.font = '35px Comic Sans MS';
+            ctx.fillRect(0,(airPlane.y - airPlane.h -20),600,60)
+
+            ctx.fillStyle = "white";
+            ctx.fillText(`Rocket Stopped at : x${(airPlane.altitude).toFixed(2)}`,30, (airPlane.y - airPlane.h + 23));
 
         ctx.fillStyle = "white";
         ctx.font = '25px Comic Sans MS';

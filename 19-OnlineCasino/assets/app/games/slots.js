@@ -4,6 +4,7 @@ export function slots(e) {
     const balance = document.getElementById('balance')
     let betElement = document.querySelector('.slotsBet')
     let payOutElement = document.querySelector('.slotsPayout')
+    payOutElement.textContent =''
     let letInitialBet = Number(betElement.value)
     let currentBet = Number(betElement.value)
     if (Number(balance.textContent) < currentBet) {
@@ -47,7 +48,7 @@ export function slots(e) {
             this.x = x
             this.y = y
             this.size = 120
-            this.velocity = 18
+            this.velocity = 22
             this.image = new Image()
             this.image.src = "./assets/images/slotCrate.png"
             this.requestedStop = false
@@ -58,7 +59,7 @@ export function slots(e) {
         }
         update() {
             if (this.requestedStop && this.velocity > 0) {
-                this.velocity -= 0.4
+                this.velocity -= 0.6
 
                 if (this.velocity < 0) {
                     this.velocity = 0
@@ -248,7 +249,7 @@ export function slots(e) {
 
     function addToResultArray(set, el) {
         if (el.velocity == 0) {
-            if (el.y > 0 && el.y < 600) {
+            if (el.y >= 0 && el.y <= 600) {
                 set.add(el)
             }
         }
@@ -283,8 +284,12 @@ export function slots(e) {
         }
 
         if (displaySet.size >= 5 && !displayDiv) {
+            let myArray=Array.from(displaySet)
+            if(myArray.length>5){
+                myArray.pop()
+            }
             displayDiv = true
-            displaySet.forEach(el => {
+            myArray.forEach(el => {
                 createDivBoxes(slotColumn, el)
             })
         }
