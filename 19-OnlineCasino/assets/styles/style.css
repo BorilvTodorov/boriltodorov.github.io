@@ -66,6 +66,9 @@ i {
 }
 
 /* navigation */
+.backToHome{
+  
+}
 
 .nav-section {
   width: 100%;
@@ -84,13 +87,23 @@ i {
 }
 
 .backToHome {
-  height: 60px;
-  width: 60px;
-  background-color: black;
-  border: 1px solid rgb(239, 169, 255);
   color: white;
-  margin: 20px;
   display: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  background-color: rgb(222, 190, 225);
+  font-size: 30px;
+  text-align: center;
+  height: 90px;
+  box-shadow: 10px 10px 5px black;
+  border: 1px solid white;
+  background-image: linear-gradient(rgba(179, 132, 201, .84), rgba(57, 31, 91, .84) 50%);
+  color: white;
+  padding: 15px;
+  margin: 10px;
+  width: 100px;
+
 }
 
 .balanceContainer {
@@ -332,6 +345,12 @@ canvas {
 .betSection {
   padding-top: 20px;
   width: 100%;
+  align-items: end;
+  justify-content: space-around;
+}
+.slots .betSection {
+  padding-top: 20px;
+  width: 100%;
   align-items: center;
   justify-content: space-around;
 }
@@ -350,7 +369,23 @@ canvas {
   height: 110px;
   box-shadow: 10px 10px 5px black;
   background-color: rgb(222, 190, 225);
+  background-color: rgb(222, 190, 225);
+  border-radius: 15px;
+  font-size: 30px;
+  text-align: center;
+  width: 90px;
+  height: 90px;
+  box-shadow: 10px 10px 5px black;
+  border: 1px solid white;
+  background-image: linear-gradient(rgba(179, 132, 201, .84), rgba(57, 31, 91, .84) 50%);
+  color: white;
+  padding: 15px;
+  border-radius: 15px;
+  margin: 10px;
+  width: 100px;
+  text-align:center
 }
+
 .airplaneStop {
   display: none;
 }
@@ -376,7 +411,17 @@ canvas {
   width: 90px;
   height: 90px;
   box-shadow: 10px 10px 5px black;
+  border: 1px solid white;
+  background-image: linear-gradient(rgba(179, 132, 201, .84), rgba(57, 31, 91, .84) 50%);
+  color: white;
+  padding: 15px;
+  border-radius: 15px;
+  margin: 10px;
+  width: 100px;
+  text-align:center
 }
+
+
 
 /* dice */
 .dice {
@@ -390,6 +435,7 @@ canvas {
   background-image: url("../images/slotsBG.jpg");
   background-size: cover;
   box-shadow: 30px 30px 30px black;
+  margin-bottom: 10px;
 }
 .slots {
   position:relative;
@@ -451,4 +497,58 @@ canvas {
 
 .slotsStartGame{
   margin: 10px;
+}
+
+.slots  button {
+  align-items: center;
+  background-color: initial;
+  background-image: linear-gradient(rgba(179, 132, 201, .84), rgba(57, 31, 91, .84) 50%);
+  border-radius: 42px;
+  border-width: 0;
+  box-shadow: rgba(57, 31, 91, 0.24) 0 2px 2px,rgba(179, 132, 201, 0.4) 0 8px 12px;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: flex;
+  font-family: Quicksand,sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  justify-content: center;
+  letter-spacing: .04em;
+  line-height: 16px;
+  margin: 15;
+  padding: 0px 13px;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: rgba(255, 255, 255, 0.4) 0 0 4px,rgba(255, 255, 255, 0.2) 0 0 12px,rgba(57, 31, 91, 0.6) 1px 1px 4px,rgba(57, 31, 91, 0.32) 4px 4px 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  border: 1px solid white;
+  transition: all 0.2
+  
+}
+.slots button {
+  background-image: linear-gradient(#B384C9, #391F5B 50%);
+}
+.slots button:hover{
+  transform:scale(1.2)
+}
+
+@media (min-width: 768px) {
+  .slots button {
+    font-size: 21px;
+    padding: 18px 34px;
+  }
+}
+
+
+.slotsBet{
+  background-image: linear-gradient(rgba(179, 132, 201, .84), rgba(57, 31, 91, .84) 50%);
+color: white;
+padding: 15px;
+border-radius: 5px;
+margin: 10px;
+width: 100px;
+text-align:center
 }

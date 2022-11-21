@@ -40,7 +40,7 @@ export function navigate(e) {
 function navigateToScreen(view) {
   clearViews();
   if (view.classList.contains("games")) {
-    view.style.display = "grid";
+    view.style.display = "flex";
   } else {
     view.style.display = "flex";
   }
