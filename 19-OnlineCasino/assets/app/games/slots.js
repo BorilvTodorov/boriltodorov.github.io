@@ -35,12 +35,12 @@ export function slots(e) {
     }
 
     let colors = {
-        1: "hotpink",
-        2: "crimson",
-        3: "yellow",
-        4: "gold",
-        5: "mediumspringgreen",
-        6: "white"
+        1: "golden",
+        2: "golden",
+        3: "golden",
+        4: "golden",
+        5: "golden",
+        6: "golden"
     }
 
     class Box {
@@ -249,7 +249,7 @@ export function slots(e) {
 
     function addToResultArray(set, el) {
         if (el.velocity == 0) {
-            if (el.y >= 0 && el.y <= 600) {
+            if (el.y >= -10 && el.y <= 602) {
                 set.add(el)
             }
         }

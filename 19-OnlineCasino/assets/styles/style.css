@@ -412,7 +412,10 @@ canvas {
 .slotScreen .box {
   width: 120px;
   height:120px;
-  border-radius: 10px;
+  border-radius: 12px;
+  border: 4px;
+  padding: 1px;
+  
 }
 .slotScreen .box img{
   width:100%
