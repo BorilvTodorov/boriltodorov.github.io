@@ -1,6 +1,7 @@
 import { randomNM ,updateMoney} from '../utils.js'
 
 export function slots(e) {
+    let myLeafArray=[]
     const balance = document.getElementById('balance')
     let betElement = document.querySelector('.slotsBet')
     let payOutElement = document.querySelector('.slotsPayout')
@@ -18,12 +19,22 @@ export function slots(e) {
         return
     }
     e.target.style.display = 'none'
+ 
+ 
     balance.textContent = (Number(balance.textContent) - Number(currentBet)).toFixed(2)
     betElement.value = ''
     const canvas = document.querySelector('.slotsCanvas')
     const ctx = canvas.getContext('2d');
     canvas.width = 600
     canvas.height = 600
+
+
+
+    const CanvasTwo = document.querySelector('.slotsCanvasTwo')
+    const ctxTwo = CanvasTwo.getContext('2d');
+    CanvasTwo.width = 600
+    CanvasTwo.height = 600
+
     let gameFinished = false
     let images = {
         1: "./assets/images/slotImages/1.png",
@@ -31,7 +42,8 @@ export function slots(e) {
         3: "./assets/images/slotImages/3.png",
         4: "./assets/images/slotImages/4.png",
         5: "./assets/images/slotImages/5.png",
-        6: "./assets/images/slotImages/6.png"
+        6: "./assets/images/slotImages/6.png",
+        7: "./assets/images/slotImages/7.png"
     }
 
     let colors = {
@@ -69,14 +81,160 @@ export function slots(e) {
             this.y += this.velocity
             if (this.y > 2280) {
                 this.y = -120
+                
             }
         }
 
     }
 
 
+    class Leaf{
+        constructor(x,y){
+            this.x=x,
+            this.y=y,
+            this.image = new Image()
+            this.image.src = "./assets/images/slotImages/redLeaf.png"
+            this.width = 207/8
+            this.height= 399/8
+            this.speedX = 0
+            this.speedY = 0
+            this.swerve=randomNM(0.5,1.5)
+            this.diagonalDown=false
+            this.diagonalUp=false
 
-    // const oneBox= new Box (0,0,0)
+        }
+
+        draw() {
+
+            ctxTwo.drawImage(this.image, this.x, this.y,  this.width, this.height)
+            console.log('drawing Leafs')
+        }
+        update() {
+            this.x+=this.speedX
+            this.y+=this.speedY
+          
+            if(!this.diagonalDown&&!this.diagonalUp){
+
+                if(this.x>600){
+                    this.x=0- this.width
+                }
+                
+                if(this.y>600){
+                    this.y=0-this.height
+                }
+            }
+            
+            if(this.diagonalDown){
+                if(this.x>600||this.y>600){
+
+                    this.x=0
+                    this.y=0
+                }
+            }
+
+            if(this.diagonalUp){
+                if(this.x>600||this.y<=0){
+                    this.x=0
+                    this.y=575
+                }
+            }
+
+        }
+    }
+    const myLeaf=new Leaf(15,15)
+    myLeaf.speedX=7
+
+
+
+function horizontalWin(possitionY){   
+  
+let leafImages={
+    1:"./assets/images/slotImages/redLeaf.png",
+    2:"./assets/images/slotImages/orangeLeaf.png",
+    3:"./assets/images/slotImages/greenLeaf.png",
+}
+let startX=25
+let startY=possitionY   
+let velocityX=5
+    for (let i = 0; i < 19; i++) {
+        let myLeaf=new Leaf(startX,startY)
+        myLeaf.image.src=leafImages[randomNM(1,3)]
+        startX+=  myLeaf.width+6
+        myLeaf.speedX=velocityX
+        // startY+=myLeaf.height+5  
+        myLeafArray.push(myLeaf)
+    }
+
+}
+
+
+function verticalWin(possitionX){  
+   
+    let leafImages={
+        1:"./assets/images/slotImages/redLeaf.png",
+        2:"./assets/images/slotImages/orangeLeaf.png",
+        3:"./assets/images/slotImages/greenLeaf.png",
+    }
+    let startX=possitionX
+    let startY=25   
+    let velocityY=5
+        for (let i = 0; i < 19; i++) {
+            let myLeaf=new Leaf(startX,startY)
+            myLeaf.image.src=leafImages[randomNM(1,3)]
+            startY+=  myLeaf.height+6
+            myLeaf.speedY=velocityY
+            myLeafArray.push(myLeaf)
+        }
+    
+    }
+
+    function diagonalDown(possitionX,possitionY){  
+    
+        let leafImages={
+            1:"./assets/images/slotImages/redLeaf.png",
+            2:"./assets/images/slotImages/orangeLeaf.png",
+            3:"./assets/images/slotImages/greenLeaf.png",
+        }
+        let startX=possitionX
+        let startY=possitionY   
+        let velocity=5
+            for (let i = 0; i < 19; i++) {
+                let myLeaf=new Leaf(startX,startY)
+                myLeaf.image.src=leafImages[randomNM(1,3)]
+                myLeaf.diagonalDown=true
+                startY+=  myLeaf.width+6
+                startX+=  myLeaf.width+6
+                myLeaf.speedY=velocity
+                myLeaf.speedX=velocity
+                
+                myLeafArray.push(myLeaf)
+            } 
+        }
+
+        function diagonalUp(possitionX,possitionY){  
+            let leafImages={
+                1:"./assets/images/slotImages/redLeaf.png",
+                2:"./assets/images/slotImages/orangeLeaf.png",
+                3:"./assets/images/slotImages/greenLeaf.png",
+            }
+            let startX=possitionX
+            let startY=possitionY   
+            let velocity=5
+                for (let i = 0; i < 19; i++) {
+                    let myLeaf=new Leaf(startX,startY)
+                    myLeaf.image.src=leafImages[randomNM(1,3)]
+                    myLeaf.diagonalUp=true
+                    startY-=  (myLeaf.width)+6
+                    startX+=  myLeaf.width+6
+                    myLeaf.speedY=-velocity
+                    myLeaf.speedX=velocity
+                    
+                    myLeafArray.push(myLeaf)
+                } 
+            }
+
+
+
 
     // boxes slot one
     let slotColumnOne = document.querySelector('.slotColumnOne')
@@ -89,7 +247,7 @@ export function slots(e) {
     let slotOneStart = 0
     let slotOneArray = []
     for (let i = 0; i < 20; i++) {
-        let id = randomNM(1, 6)
+        let id = randomNM(1, 7)
         let box = new Box(-2, slotOneStart, id)
         box.image.src = images[id]
         slotOneStart += 120
@@ -113,7 +271,7 @@ export function slots(e) {
     let slotTwoStart = 0
     let slotTwoArray = []
     for (let i = 0; i < 20; i++) {
-        let id = randomNM(1, 6)
+        let id = randomNM(1, 7)
         let box = new Box(120, slotTwoStart, id)
         box.image.src = images[id]
         slotTwoStart += 120
@@ -137,7 +295,7 @@ export function slots(e) {
     let slotThreeStart = 0
     let slotThreeArray = []
     for (let i = 0; i < 20; i++) {
-        let id = randomNM(1, 6)
+        let id = randomNM(1, 7)
         let box = new Box(240, slotThreeStart, id)
         box.image.src = images[id]
         slotThreeStart += 120
@@ -162,7 +320,7 @@ export function slots(e) {
     let slotFourStart = 0
     let slotFourArray = []
     for (let i = 0; i < 20; i++) {
-        let id = randomNM(1, 6)
+        let id = randomNM(1, 7)
         let box = new Box(360, slotFourStart, id)
         box.image.src = images[id]
         slotFourStart += 120
@@ -186,7 +344,7 @@ export function slots(e) {
     let slotFiveStart = 0
     let slotFiveArray = []
     for (let i = 0; i < 20; i++) {
-        let id = randomNM(1, 6)
+        let id = randomNM(1, 7)
         let box = new Box(480, slotFiveStart, id)
         box.image.src = images[id]
         slotFiveStart += 120
@@ -202,6 +360,8 @@ export function slots(e) {
         if (gameFinished) {
             return
         }
+    
+     
 
         let deltaTime=timestamp - lastTime
         lastTime=timestamp
@@ -224,16 +384,13 @@ export function slots(e) {
 
         // slot Five
         slotColumnFunctionality(displayArrayFive, slotFiveArray, triggerFiveActive, displayedDivFive, slotColumnFive)
-
-        ctx.fillStyle = "white";
-        ctx.font = '35px Comic Sans MS';
-        ctx.fillText(`x`, 40, 20);
         
         if (slotColumnFive.childElementCount >= 5) {
             gameFinished = true
             ctx.clearRect(0, 0, canvas.width, canvas.height)
-            checkMatches(slotColumnOne.children, slotColumnTwo.children, slotColumnThree.children, slotColumnFour.children, slotColumnFive.children)
+            
             e.target.style.display = 'block'
+            checkMatches(slotColumnOne.children, slotColumnTwo.children, slotColumnThree.children, slotColumnFour.children, slotColumnFive.children)
             if (letInitialBet !== currentBet) {
                 payOutElement.textContent =Number(currentBet).toFixed(2)
                 balance.textContent = (Number(balance.textContent) + Number(payOutElement.textContent)).toFixed(2)
@@ -241,15 +398,32 @@ export function slots(e) {
             }
             sessionStorage.money = balance.textContent
             updateMoney(sessionStorage.id, Number(sessionStorage.money))
+            animateWinLines()
         }
     }
+
     requestAnimationFrame(animate)
     }
     animate(0)
 
+    function animateWinLines(){
+        if( e.target.style.display == 'none'){
+            myLeafArray=[]
+        }
+        
+        ctxTwo.clearRect(0, 0, canvas.width, canvas.height)
+        if(myLeafArray.length>0){
+            myLeafArray.forEach(el=>{
+                el.draw()
+                el.update()
+            })
+        }
+        requestAnimationFrame(animateWinLines)
+    }
+
     function addToResultArray(set, el) {
         if (el.velocity == 0) {
-            if (el.y >= -10 && el.y <= 602) {
+            if (el.y >= -40 && el.y <= 602) {
                 set.add(el)
             }
         }
@@ -331,7 +505,8 @@ export function slots(e) {
             Arr3[0].style.borderStyle = "solid"
             Arr4[0].style.borderStyle = "solid"
             console.log("Horisontal Match 0");
-            currentBet *= 1.5
+            horizontalWin(29)
+            currentBet *= 1.8
 
         }
 
@@ -348,7 +523,8 @@ export function slots(e) {
             Arr3[1].style.borderStyle = "solid"
             Arr4[1].style.borderStyle = "solid"
             console.log("Horisontal Match 1");
-            currentBet *= 1.5
+            horizontalWin(152)
+            currentBet *= 1.8
 
         }
 
@@ -365,7 +541,8 @@ export function slots(e) {
             Arr3[2].style.borderStyle = "solid"
             Arr4[2].style.borderStyle = "solid"
             console.log("Horisontal Match 2");
-            currentBet *= 1.5
+            horizontalWin(271)
+            currentBet *= 1.8
 
         }
 
@@ -382,7 +559,8 @@ export function slots(e) {
             Arr3[3].style.borderStyle = "solid"
             Arr4[3].style.borderStyle = "solid"
             console.log("Horisontal Match 3");
-            currentBet *= 1.5
+            horizontalWin(405)
+            currentBet *= 1.8
 
         }
 
@@ -399,7 +577,8 @@ export function slots(e) {
             Arr3[4].style.borderStyle = "solid"
             Arr4[4].style.borderStyle = "solid"
             console.log("Horisontal Match 4");
-            currentBet *= 1.5
+            horizontalWin(525)
+            currentBet *= 1.8
 
         }
 
@@ -416,7 +595,8 @@ export function slots(e) {
             Arr0[3].style.borderStyle = "solid"
             Arr0[4].style.borderStyle = "solid"
             console.log("Vertical Match 0");
-            currentBet *= 1.5
+            verticalWin(40)
+            currentBet *= 1.8
 
         }
 
@@ -433,7 +613,8 @@ export function slots(e) {
             Arr1[3].style.borderStyle = "solid"
             Arr1[4].style.borderStyle = "solid"
             console.log("Vertical Match 1");
-            currentBet *= 1.5
+            verticalWin(160)
+            currentBet *= 1.8
 
         }
 
@@ -450,7 +631,8 @@ export function slots(e) {
             Arr2[3].style.borderStyle = "solid"
             Arr2[4].style.borderStyle = "solid"
             console.log("Vertical Match 2");
-            currentBet *= 1.5
+            verticalWin(290)
+            currentBet *= 1.8
 
         }
 
@@ -467,7 +649,8 @@ export function slots(e) {
             Arr3[3].style.borderStyle = "solid"
             Arr3[4].style.borderStyle = "solid"
             console.log("Vertical Match 3");
-            currentBet *= 1.5
+            verticalWin(413)
+            currentBet *= 1.8
 
         }
 
@@ -484,7 +667,8 @@ export function slots(e) {
             Arr4[3].style.borderStyle = "solid"
             Arr4[4].style.borderStyle = "solid"
             console.log("Vertical Match 4");
-            currentBet *= 1.5
+            verticalWin(535)
+            currentBet *= 1.8
 
         }
         // diagonal Match
@@ -499,8 +683,9 @@ export function slots(e) {
             Arr2[2].style.borderStyle = "solid"
             Arr1[3].style.borderStyle = "solid"
             Arr0[4].style.borderStyle = "solid"
+            diagonalUp(25,575)
             console.log("Diagonal Up match");
-            currentBet *= 1.5
+            currentBet *= 1.8
 
         }
         if (
@@ -509,13 +694,15 @@ export function slots(e) {
             (checkWilds(Arr2[2].id, Arr3[3].id)) &
             (checkWilds(Arr3[3].id, Arr4[4].id))
         ) {
-            Arr0[0].style.borderStyle = "solid"
-            Arr1[1].style.borderStyle = "solid"
-            Arr2[2].style.borderStyle = "solid"
-            Arr3[3].style.borderStyle = "solid"
-            Arr4[4].style.borderStyle = "solid"
+            Arr0[0].style.borderStyle = "none"
+            Arr1[1].style.borderStyle = "none"
+            Arr2[2].style.borderStyle = "none"
+            Arr3[3].style.borderStyle = "none"
+            Arr4[4].style.borderStyle = "none"
             console.log("Diagonal Down match");
-            currentBet *= 1.5
+            diagonalDown(25,25)
+           
+            currentBet *= 1.8
 
         }
     }

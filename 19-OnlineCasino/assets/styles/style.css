@@ -433,6 +433,13 @@ canvas {
   box-shadow: 30px 30px 30px black;
   margin-bottom: 10px;
 }
+
+.slotsCanvasTwo{
+  position: absolute;
+  background: transparent;
+  top: 0;
+  z-index: 15;
+}
 .slots {
   position:relative;
   display: none;
