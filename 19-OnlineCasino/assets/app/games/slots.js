@@ -551,7 +551,7 @@ function verticalWin(possitionX){
         if (
             //3
             (checkWilds(Arr0[3].id, Arr1[3].id)) &&
-            (checkWilds(Arr1[3].id, Arr3[3].id)) &&
+            (checkWilds(Arr1[3].id, Arr2[3].id)) &&
             (checkWilds(Arr2[3].id, Arr3[3].id)) &&
             (checkWilds(Arr3[3].id, Arr4[3].id))
         ) {
@@ -569,7 +569,7 @@ function verticalWin(possitionX){
         if (
             //4
             (checkWilds(Arr0[4].id, Arr1[4].id)) &&
-            (checkWilds(Arr1[4].id, Arr3[4].id)) &&
+            (checkWilds(Arr1[4].id, Arr2[4].id)) &&
             (checkWilds(Arr2[4].id, Arr3[4].id)) &&
             (checkWilds(Arr3[4].id, Arr4[4].id))
         ) {
