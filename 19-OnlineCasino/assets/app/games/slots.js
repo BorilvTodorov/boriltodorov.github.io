@@ -42,8 +42,9 @@ export function slots(e) {
         3: "./assets/images/slotImages/3.png",
         4: "./assets/images/slotImages/4.png",
         5: "./assets/images/slotImages/5.png",
-        6: "./assets/images/slotImages/6.png",
-        7: "./assets/images/slotImages/7.png"
+        6: "./assets/images/slotImages/6.png", // wild
+        7: "./assets/images/slotImages/7.png",
+        8: "./assets/images/slotImages/8.png",
     }
 
     let colors = {
@@ -247,7 +248,7 @@ function verticalWin(possitionX){
     let slotOneStart = 0
     let slotOneArray = []
     for (let i = 0; i < 20; i++) {
-        let id = randomNM(1, 7)
+        let id = randomNM(1, 8)
         let box = new Box(-2, slotOneStart, id)
         box.image.src = images[id]
         slotOneStart += 120
@@ -271,7 +272,7 @@ function verticalWin(possitionX){
     let slotTwoStart = 0
     let slotTwoArray = []
     for (let i = 0; i < 20; i++) {
-        let id = randomNM(1, 7)
+        let id = randomNM(1, 8)
         let box = new Box(120, slotTwoStart, id)
         box.image.src = images[id]
         slotTwoStart += 120
@@ -295,7 +296,7 @@ function verticalWin(possitionX){
     let slotThreeStart = 0
     let slotThreeArray = []
     for (let i = 0; i < 20; i++) {
-        let id = randomNM(1, 7)
+        let id = randomNM(1, 8)
         let box = new Box(240, slotThreeStart, id)
         box.image.src = images[id]
         slotThreeStart += 120
@@ -320,7 +321,7 @@ function verticalWin(possitionX){
     let slotFourStart = 0
     let slotFourArray = []
     for (let i = 0; i < 20; i++) {
-        let id = randomNM(1, 7)
+        let id = randomNM(1, 8)
         let box = new Box(360, slotFourStart, id)
         box.image.src = images[id]
         slotFourStart += 120
@@ -344,7 +345,7 @@ function verticalWin(possitionX){
     let slotFiveStart = 0
     let slotFiveArray = []
     for (let i = 0; i < 20; i++) {
-        let id = randomNM(1, 7)
+        let id = randomNM(1, 8)
         let box = new Box(480, slotFiveStart, id)
         box.image.src = images[id]
         slotFiveStart += 120
@@ -487,6 +488,8 @@ function verticalWin(possitionX){
             return true
         } else if (box2 == 6) {
             return true
+        }else{
+            return false
         }
 
     }
@@ -494,9 +497,9 @@ function verticalWin(possitionX){
     function checkMatches(Arr0, Arr1, Arr2, Arr3, Arr4) {
         if (
             //0
-            (checkWilds(Arr0[0].id, Arr1[0].id)) &
-            (checkWilds(Arr1[0].id, Arr2[0].id)) &
-            (checkWilds(Arr2[0].id, Arr3[0].id)) &
+            (checkWilds(Arr0[0].id, Arr1[0].id)) &&
+            (checkWilds(Arr1[0].id, Arr2[0].id)) &&
+            (checkWilds(Arr2[0].id, Arr3[0].id)) &&
             (checkWilds(Arr3[0].id, Arr4[0].id))
         ) {
             Arr0[0].style.borderStyle = "solid";
@@ -512,9 +515,9 @@ function verticalWin(possitionX){
 
         if (
             //1
-            (checkWilds(Arr0[1].id, Arr1[1].id)) &
-            (checkWilds(Arr1[1].id, Arr2[1].id)) &
-            (checkWilds(Arr2[1].id, Arr3[1].id)) &
+            (checkWilds(Arr0[1].id, Arr1[1].id)) &&
+            (checkWilds(Arr1[1].id, Arr2[1].id)) &&
+            (checkWilds(Arr2[1].id, Arr3[1].id)) &&
             (checkWilds(Arr3[1].id, Arr4[1].id))
         ) {
             Arr0[1].style.borderStyle = "solid"
@@ -530,9 +533,9 @@ function verticalWin(possitionX){
 
         if (
             //22
-            (checkWilds(Arr0[2].id, Arr1[2].id)) &
-            (checkWilds(Arr1[2].id, Arr2[2].id)) &
-            (checkWilds(Arr2[2].id, Arr3[2].id)) &
+            (checkWilds(Arr0[2].id, Arr1[2].id)) &&
+            (checkWilds(Arr1[2].id, Arr2[2].id)) &&
+            (checkWilds(Arr2[2].id, Arr3[2].id)) &&
             (checkWilds(Arr3[2].id, Arr4[2].id))
         ) {
             Arr0[2].style.borderStyle = "solid"
@@ -548,9 +551,9 @@ function verticalWin(possitionX){
 
         if (
             //3
-            (checkWilds(Arr0[3].id, Arr1[3].id)) &
-            (checkWilds(Arr1[3].id, Arr3[3].id)) &
-            (checkWilds(Arr2[3].id, Arr3[3].id)) &
+            (checkWilds(Arr0[3].id, Arr1[3].id)) &&
+            (checkWilds(Arr1[3].id, Arr3[3].id)) &&
+            (checkWilds(Arr2[3].id, Arr3[3].id)) &&
             (checkWilds(Arr3[3].id, Arr4[3].id))
         ) {
             Arr0[3].style.borderStyle = "solid"
@@ -566,9 +569,9 @@ function verticalWin(possitionX){
 
         if (
             //4
-            (checkWilds(Arr0[4].id, Arr1[4].id)) &
-            (checkWilds(Arr1[4].id, Arr3[4].id)) &
-            (checkWilds(Arr2[4].id, Arr3[4].id)) &
+            (checkWilds(Arr0[4].id, Arr1[4].id)) &&
+            (checkWilds(Arr1[4].id, Arr3[4].id)) &&
+            (checkWilds(Arr2[4].id, Arr3[4].id)) &&
             (checkWilds(Arr3[4].id, Arr4[4].id))
         ) {
             Arr0[4].style.borderStyle = "solid"
@@ -584,9 +587,9 @@ function verticalWin(possitionX){
 
         // vertical matches _-----------------------------------------------------------------
         if (
-            (checkWilds(Arr0[0].id, Arr0[1].id)) &
-            (checkWilds(Arr0[1].id, Arr0[2].id)) &
-            (checkWilds(Arr0[2].id, Arr0[3].id)) &
+            (checkWilds(Arr0[0].id, Arr0[1].id)) &&
+            (checkWilds(Arr0[1].id, Arr0[2].id)) &&
+            (checkWilds(Arr0[2].id, Arr0[3].id)) &&
             (checkWilds(Arr0[3].id, Arr0[4].id))
         ) {
             Arr0[0].style.borderStyle = "solid"
@@ -602,9 +605,9 @@ function verticalWin(possitionX){
 
         if (
             //1
-            (checkWilds(Arr1[0].id, Arr1[1].id)) &
-            (checkWilds(Arr1[1].id, Arr1[2].id)) &
-            (checkWilds(Arr1[2].id, Arr1[3].id)) &
+            (checkWilds(Arr1[0].id, Arr1[1].id)) &&
+            (checkWilds(Arr1[1].id, Arr1[2].id)) &&
+            (checkWilds(Arr1[2].id, Arr1[3].id)) &&
             (checkWilds(Arr1[3].id, Arr1[4].id))
         ) {
             Arr1[0].style.borderStyle = "solid"
@@ -620,9 +623,9 @@ function verticalWin(possitionX){
 
         if (
             //2
-            (checkWilds(Arr2[0].id, Arr2[1].id)) &
-            (checkWilds(Arr2[1].id, Arr2[2].id)) &
-            (checkWilds(Arr2[2].id, Arr2[3].id)) &
+            (checkWilds(Arr2[0].id, Arr2[1].id)) &&
+            (checkWilds(Arr2[1].id, Arr2[2].id)) &&
+            (checkWilds(Arr2[2].id, Arr2[3].id)) &&
             (checkWilds(Arr2[3].id, Arr2[4].id))
         ) {
             Arr2[0].style.borderStyle = "solid"
@@ -638,9 +641,9 @@ function verticalWin(possitionX){
 
         if (
             //3
-            (checkWilds(Arr3[0].id, Arr3[1].id)) &
-            (checkWilds(Arr3[1].id, Arr3[2].id)) &
-            (checkWilds(Arr3[2].id, Arr3[3].id)) &
+            (checkWilds(Arr3[0].id, Arr3[1].id)) &&
+            (checkWilds(Arr3[1].id, Arr3[2].id)) &&
+            (checkWilds(Arr3[2].id, Arr3[3].id)) &&
             (checkWilds(Arr3[3].id, Arr3[4].id))
         ) {
             Arr3[0].style.borderStyle = "solid"
@@ -656,9 +659,9 @@ function verticalWin(possitionX){
 
         if (
             //4
-            (checkWilds(Arr4[0].id, Arr4[1].id)) &
-            (checkWilds(Arr4[1].id, Arr4[2].id)) &
-            (checkWilds(Arr4[2].id, Arr4[3].id)) &
+            (checkWilds(Arr4[0].id, Arr4[1].id)) &&
+            (checkWilds(Arr4[1].id, Arr4[2].id)) &&
+            (checkWilds(Arr4[2].id, Arr4[3].id)) &&
             (checkWilds(Arr4[3].id, Arr4[4].id))
         ) {
             Arr4[0].style.borderStyle = "solid"
@@ -673,9 +676,9 @@ function verticalWin(possitionX){
         }
         // diagonal Match
         if (
-            (checkWilds(Arr0[4].id, Arr1[3].id)) &
-            (checkWilds(Arr1[3].id, Arr2[2].id)) &
-            (checkWilds(Arr2[2].id, Arr3[1].id)) &
+            (checkWilds(Arr0[4].id, Arr1[3].id)) &&
+            (checkWilds(Arr1[3].id, Arr2[2].id)) &&
+            (checkWilds(Arr2[2].id, Arr3[1].id)) &&
             (checkWilds(Arr3[1].id, Arr4[0].id))
         ) {
             Arr4[0].style.borderStyle = "solid"
@@ -689,9 +692,9 @@ function verticalWin(possitionX){
 
         }
         if (
-            (checkWilds(Arr0[0].id, Arr1[1].id)) &
-            (checkWilds(Arr1[1].id, Arr2[2].id)) &
-            (checkWilds(Arr2[2].id, Arr3[3].id)) &
+            (checkWilds(Arr0[0].id, Arr1[1].id)) &&
+            (checkWilds(Arr1[1].id, Arr2[2].id)) &&
+            (checkWilds(Arr2[2].id, Arr3[3].id)) &&
             (checkWilds(Arr3[3].id, Arr4[4].id))
         ) {
             Arr0[0].style.borderStyle = "none"
