@@ -10,7 +10,7 @@ export async function updateMoney(id,money) {
         body:JSON.stringify(body)
     } )
     const data= await response.json()
-    console.log(data)
+    // console.log(data)
 }
 
 

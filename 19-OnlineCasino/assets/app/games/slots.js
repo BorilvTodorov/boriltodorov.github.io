@@ -108,7 +108,6 @@ export function slots(e) {
         draw() {
 
             ctxTwo.drawImage(this.image, this.x, this.y,  this.width, this.height)
-            console.log('drawing Leafs')
         }
         update() {
             this.x+=this.speedX

@@ -23,7 +23,7 @@ export async function login(e) {
                     id:currentId
                 }
 
-                console.log(currentId)
+                // console.log(currentId)
                 authenticateUser(myObj)
             }
         })
