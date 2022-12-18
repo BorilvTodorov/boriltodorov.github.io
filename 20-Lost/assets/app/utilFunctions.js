@@ -80,13 +80,15 @@ function platformCollision({
 }
 
 //  ========================================================================LEVEL FUNCTIONS========================================================================================================
-
+console.log('level One' ,levelOneLayout)
+console.log('level Two' ,levelTwoLayout)
+console.log('level Three' ,levelThreeLayout)
 function determineLevel(currentLevel) {
     if (currentLevel == 1) {
-        return levelOne
+        return levelOneLayout
     } else if ((currentLevel == 2)) {
-        return levelTwo
+        return levelTwoLayout
     } else if ((currentLevel == 3)) {
-        return levelThree
+        return levelThreeLayout
     }
 }
