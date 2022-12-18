@@ -158,7 +158,7 @@ function animate() {
         renderLevel(levelLayout)
     }
     animationFrame++
-    ctx.fillStyle = 'white'
+    ctx.fillStyle = 'black'
     ctx.fillRect(0, 0, canvas.width, canvas.height)
 
 
