@@ -136,8 +136,6 @@ window.addEventListener('keyup', (event) => {
     }
 })
 
-
-
 //  RUN GAME
 
 function animate() {
