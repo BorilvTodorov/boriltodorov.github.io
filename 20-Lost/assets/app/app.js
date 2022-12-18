@@ -154,7 +154,6 @@ function animate() {
             musingIsNotPlaying=false
         }
     }
-console.log(musingIsNotPlaying)
     if (player.levelComplete) {
         currentLevel++
         levelLayout = determineLevel(currentLevel)
