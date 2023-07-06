@@ -1,5 +1,6 @@
 /** @type{HTMLCanvasElement} */
-
+const targetFPS = 60;
+const frameTime = 1000 / targetFPS; // Time per frame in milliseconds
 const canvasOne = document.getElementById('canvas-1');
 const ctx1 = canvasOne.getContext('2d');
 
@@ -270,14 +271,6 @@ class Door {
         }
     }
 }
-
-
-
-
-
-
-
-
 //  left world
 // borders
 
@@ -293,7 +286,18 @@ let boxesRight = []
 
 
 
-function animate() {
+let lastFrameTime = 0;
+
+function animate(currentTime) {
+    const elapsedTime = currentTime - lastFrameTime;
+
+    // Check if enough time has passed for the next frame
+    if (elapsedTime < frameTime) {
+      requestAnimationFrame(animate);
+      return; // Skip this frame
+    }
+
+    lastFrameTime = currentTime;
 
     //  level change
     nextLevel()

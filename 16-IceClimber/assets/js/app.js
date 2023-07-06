@@ -1,5 +1,7 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
+const targetFPS = 60;
+const frameTime = 1000 / targetFPS; // Time per frame in milliseconds
 
 canvas.width = 600
 canvas.height = 600
@@ -204,7 +206,20 @@ const keys = {
 }
 let parachute = new Image()
 parachute.src = "./assets/images/sprite/Parachute.png"
-function animate() {
+
+let lastFrameTime = 0;
+
+function animate(currentTime) {
+    const elapsedTime = currentTime - lastFrameTime;
+
+    // Check if enough time has passed for the next frame
+    if (elapsedTime < frameTime) {
+      requestAnimationFrame(animate);
+      return; // Skip this frame
+    }
+
+    lastFrameTime = currentTime;
+
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     ctx.drawImage(backgRound, 0, -bgPossitionY)
     // ctx.drawImage(topIce,-20,-40,canvas.width+30,150)

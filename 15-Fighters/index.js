@@ -1,5 +1,7 @@
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
+const targetFPS = 60;
+const frameTime = 1000 / targetFPS; // Time per frame in milliseconds
 let startGame = false
 let endGame=false
 let playerScoreDisplay = document.querySelector('.current-score')
@@ -171,7 +173,7 @@ canvas.height = 576
 // game Stats Player
 let gameScore = 0
 let playerIsDefending = false
-let defendingDuration = 150;
+let defendingDuration = 190;
 let playerCanDefend = true
 let dispalyDefend = false
 let canDodge = true
@@ -184,8 +186,8 @@ let playerRegeneration = 0
 
 // game Stats Enemy
 let enemyScoreMultiplier=1
-let enemyStartDamage = 12
-let enemyMovementSpeed = 5
+let enemyStartDamage = 8
+let enemyMovementSpeed = 4
 let enemyArmor = 2
 let enemyRegen = 0
 let enemyCanJump = true
@@ -1037,18 +1039,36 @@ function computerAi() {
 
 
     if (enemy.possition.x > (player.possition.x + 50)) { // if player is infront of enemy
-        if ((enemy.possition.x - player.possition.x) <= 200 && enemy.possition.x > player.possition.x) {
-            fakeKeyPress('0')
-        } else if (player.possition.x < enemy.possition.x) {
-            fakeKeyPress('ArrowLeft')
+        if (canEnemyAttackIcon){
+            if ((enemy.possition.x - player.possition.x) <= 200 && enemy.possition.x > player.possition.x) {
+                fakeKeyPress('0')
+            } else if (player.possition.x < enemy.possition.x) {
+                fakeKeyPress('ArrowLeft')
+            }
+        }else{
+            if ((enemy.possition.x - player.possition.x) && enemy.possition.x > player.possition.x) {
+                fakeKeyPress('ArrowRight')
+            } else if (player.possition.x < enemy.possition.x) {
+                fakeKeyPress('ArrowLeft')
+            }
         }
     }
 
-    if (enemy.possition.x < (player.possition.x + 51)) {// if player is behind of enemy
-        if (((player.possition.x + 50) - enemy.possition.x) >= 600 && enemy.possition.x < (player.possition.x + 50)) {
-            fakeKeyPress('0')
-        } else if ((player.possition.x + 200) !== enemy.possition.x) {
-            fakeKeyPress('ArrowRight')
+    if (canEnemyAttackIcon) {
+        if (enemy.possition.x < (player.possition.x + 51)) {// if player is behind of enemy
+            if (((player.possition.x + 50) - enemy.possition.x) >= 800 && enemy.possition.x < (player.possition.x + 50)) {
+                fakeKeyPress('0')
+            } else if ((player.possition.x + 200) !== enemy.possition.x) {
+                fakeKeyPress('ArrowRight')
+            }
+        }
+    } else {
+        if (enemy.possition.x < (player.possition.x + 51)) {// if player is behind of enemy
+            if (((player.possition.x + 50) - enemy.possition.x) && enemy.possition.x < (player.possition.x + 50)) {
+                fakeKeyPress('ArrowLeft')
+            } else if ((player.possition.x + 200) !== enemy.possition.x) {
+                fakeKeyPress('ArrowRight')
+            }
         }
     }
 
@@ -1152,7 +1172,19 @@ nextEnemyButton.addEventListener('click', (event) => {
 
 })
 
-function animate() {
+let lastFrameTime = 0;
+
+function animate(currentTime) {
+    const elapsedTime = currentTime - lastFrameTime;
+
+    // Check if enough time has passed for the next frame
+    if (elapsedTime < frameTime) {
+      requestAnimationFrame(animate);
+      return; // Skip this frame
+    }
+
+    lastFrameTime = currentTime;
+
     gameScoreDisplay.innerHTML = gameScore
     if(endGame)return
     window.requestAnimationFrame(animate) // means what animation you are going to loop over
@@ -1175,7 +1207,7 @@ function animate() {
     if (player.health <= 0) {
         player.switchSprite('death')
         // endGame = true
-        
+
     }
     if (!player.dead && !enemy.dead && nextLevelScreen.style.display == 'none') {
         computerAi()
@@ -1348,7 +1380,8 @@ function animate() {
         endGame=true
     }
 }
-    animate()
+   // Start the animation loop
+   requestAnimationFrame(animate);
 
 
 

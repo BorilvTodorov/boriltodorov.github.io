@@ -1,5 +1,7 @@
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
+const targetFPS = 60;
+const frameTime = 1000 / targetFPS; // Time per frame in milliseconds
 //  GAME VARIABLES
 
 
@@ -137,59 +139,67 @@ window.addEventListener('keyup', (event) => {
 })
 
 //  RUN GAME
+let lastFrameTime = 0;
 
-function animate() {
+function animate(currentTime) {
+    const elapsedTime = currentTime - lastFrameTime;
+
+    // Check if enough time has passed for the next frame
+    if (elapsedTime < frameTime) {
+      requestAnimationFrame(animate);
+      return; // Skip this frame
+    }
+
+    lastFrameTime = currentTime;
+
     if (canPlayMusic) {
-        if(musingIsNotPlaying){
-            let melody = new Audio
-            melody.src = 'assets/Sound/melody.mp3'
-            melody.volume = 0.3
-            melody.play()
-            let rain = new Audio
-            rain.src = 'assets/Sound/rain.mp3'
-            rain.volume = 0.3
-            rain.play()
-            musingIsNotPlaying=false
-        }
+      if (musingIsNotPlaying) {
+        let melody = new Audio();
+        melody.src = 'assets/Sound/melody.mp3';
+        melody.volume = 0.3;
+        melody.play();
+        let rain = new Audio();
+        rain.src = 'assets/Sound/rain.mp3';
+        rain.volume = 0.3;
+        rain.play();
+        musingIsNotPlaying = false;
+      }
     }
+
     if (player.levelComplete) {
-        currentLevel++
-        levelLayout = determineLevel(currentLevel)
-        renderLevel(levelLayout)
+      currentLevel++;
+      levelLayout = determineLevel(currentLevel);
+      renderLevel(levelLayout);
     }
-    animationFrame++
-    ctx.fillStyle = 'black'
-    ctx.fillRect(0, 0, canvas.width, canvas.height)
 
+    animationFrame++;
+    ctx.fillStyle = 'black';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+    displayText(deathCounter, 50, 50);
+    background.update();
+    player.update();
+    player.velocity.x = 0;
 
-
-
-    displayText(deathCounter, 50, 50)
-    background.update()
-    player.update()
-    player.velocity.x = 0
     if (keys.d.pressed) {
-        player.velocity.x = horizontalVelocity
+      player.velocity.x = horizontalVelocity;
     } else if (keys.a.pressed) {
-        player.velocity.x = -horizontalVelocity
+      player.velocity.x = -horizontalVelocity;
     }
 
+    displayText('Level   ' + currentLevel, 460, 25);
+    displayText('💀' + deathCounter, 20, 30);
+    displayText(dashCount + '💨', 950, 30);
 
-    displayText('Level   ' + currentLevel, 460, 25)
-    displayText('💀' + deathCounter, 20, 30)
-    displayText(dashCount + '💨', 950, 30)
     raindropsArray.forEach(raindrop => {
-        raindrop.draw()
-    })
+      raindrop.draw();
+    });
 
+    requestAnimationFrame(animate);
+  }
 
-    // renderCollisionBlocks()
-
-    requestAnimationFrame(animate)
-}
-
-animate()
+  // Start the animation loop
+  requestAnimationFrame(animate);
 
 
 function genereteCollisionBlocks(initialArray, color) {
